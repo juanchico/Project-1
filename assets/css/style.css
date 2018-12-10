@@ -1,11 +1,9 @@
 body{
-   
+    background-color: black;
  font-family: 'Indie Flower', cursive;
 font-size: 150%;
 }
-#sideBar{
-    background-color: black;
-}
+
 #sbr1{
     height: 200px;
 }
@@ -33,7 +31,7 @@ font-size: 150%;
     background-repeat: no-repeat;
 }
 #sbr2{
-height:461px;
+height:202px;
 }
 #countBox{
 height: 500px;
@@ -73,7 +71,7 @@ height: 500px;
     background-repeat: no-repeat;
 }
 #sbr3{
-    height: 200px;
+    height: 65px;
 }
 #startGame{
     height: 80px;
@@ -89,6 +87,7 @@ height: 500px;
     margin-left: 104px;
     background-color: gray;
     border-color: grey;
+    width: 143px;
 }
 .float-right {
     height: 100px;
