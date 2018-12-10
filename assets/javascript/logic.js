@@ -26,8 +26,7 @@ var movieTrailers = [];
 var alreadySelected = [];
 var ytPlayerSRC = "https://www.youtube.com/embed/";
 var ytPlayerId;
-
-var test = [];
+var dbIndex = 0;
 
 // ***************************************
 
@@ -43,11 +42,6 @@ function dealCards() {
             getMovieInfo(titleChoice);
         }
     }
-
-    // console.log(alreadySelected);
-    // console.log(movieCards);
-    // console.log(movieTrailers);
-
 }
 
 function getMovieInfo(movieID) {
@@ -60,18 +54,32 @@ function getMovieInfo(movieID) {
         method: "GET"
     }).then(function(data) {
 
+        // Extract movie information
+        var moviePoster = data.Poster;
         var movieTitle = data.Title;
             movieTitle = movieTitle.toLowerCase();
-        // var movieRated = data.Rated;
-        // var movieRuntime = data.Runtime.substring(0,3);
-        // var movieRelease = data.Released;
-        // var cardValue = parseInt(data.imdbRating) * 10;
+        var cardValue = parseInt(data.imdbRating) * 10;
 
-        // console.log("Title: " + movieTitle);
-        // console.log("Rated: " + movieRated);
-        // console.log("Runtime: " + movieRuntime); 
-        // console.log("Released: " + movieRelease);
-        // console.log("Card Value: " + cardValue);
+        var moviePlot = data.Plot;
+        var movieActors = data.Actors;
+        var movieRated = data.Rated;
+        var movieRuntime = data.Runtime.substring(0,3);
+        var movieRelease = data.Released;
+
+        movieRef = firebase.ref("/cardDeck/" + dbIndex);
+        dbIndex++;
+
+        // Push movie information to Firebase
+        movieRef.set({
+            Poster: moviePoster,
+            Title: data.Title,
+            Value: cardValue,
+            Plot: moviePlot,
+            Actors: movieActors,
+            Rating: movieRated,
+            Runtime: movieRuntime,
+            Release: movieRelease
+        });
 
         if ($.inArray(movieTitle, movieCards) === -1) {
             movieCards.push(movieTitle);
@@ -101,7 +109,6 @@ function pullTrailer(movie) {
 
         if (trailerTitle.includes(movie) !== -1) {
             movieTrailers.push(trailerVideoID);
-            test.push(trailerTitle);
             ytPlayerId = trailerVideoID;
         }
         else {
@@ -115,6 +122,11 @@ function pullTrailer(movie) {
 
 dealCards();
 
+// CREATE onClick function to set TrailerID attribute to corresponding card in Firebase when movie is selected.
+
+
+
+// Test modal (onClick) logic
 $(document).on("click", "#playMovie", function() {
 
     for (var i = 0; i < 10; i++) {
