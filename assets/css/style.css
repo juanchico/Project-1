@@ -99,20 +99,22 @@ height: 500px;
     height: 150px;
 }
 .card{
-    width: 10rem;
+    width: 111px;
     
     margin-left: 78px;
 }
 
 .card-body{
-   
+    display: flex;
+    flex-wrap: nowrap;
     height:162px;
     background-image: url("../images/img-9.png");
     background-size: 100%;
     background-repeat: no-repeat;
 }
 .card-body1{
-    
+    display: flex;
+  flex-wrap: nowrap;
     height:150px;
     background-image: url("../images/img-7-1.png");
     background-size: 100%;
