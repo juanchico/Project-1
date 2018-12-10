@@ -1,136 +1,135 @@
 body{
-   
+    background-color: black;
     font-family: 'Indie Flower', cursive;
-   font-size: 150%;
-   }
-   #sideBar{
-       background-color: black;
-   }
-   #sbr1{
-       height: 200px;
-   }
-   #playerInfo{
-       height: 85px;
-       margin: 9px;
-     
-   }
-   #player{
-       height: 55px;
-       margin-top: 12px;
-       margin-left: 34px;
-       margin-right: 88px;
-       background-image: url("../images/img-3.png");
-       background-size: 100%;
-       background-repeat: no-repeat;
-   }
-   #opponent{
-       height:57px;
-       margin-top: 12px;
-       margin-left: 41px;
-       margin-right: 79px;
-       background-image: url("../images/img-3.png");
-       background-size: 100%;
-       background-repeat: no-repeat;
-   }
-   #sbr2{
-   height:461px;
-   }
-   #countBox{
-   height: 500px;
-   }
-   #numRounds{
-       height: 180px;
-   }
-   #numLeft{
-       margin-top: 12px;
-       height:57px;
-       margin-left: 41px;
-       margin-right: 79px;
-       background-image: url("../images/img-3.png");
-       background-size: 100%;
-       background-repeat: no-repeat;
-   }
-   #oppInfo{
-       height: 85px;
-   }
-   #rounds{
-      height:105px;
-   }
-   #score1{
-       height: 150px;
-       margin-left: 27px;
-   }
-   #pWins{
-       height:65px;
-       background-image: url("../images/img-1.png");
-       background-size: 100%;
-       background-repeat: no-repeat;
-   }
-   #oWins{
-       height:65px;
-       background-image: url("../images/img-1.png");
-       background-size: 100%;
-       background-repeat: no-repeat;
-   }
-   #sbr3{
-       height: 200px;
-   }
-   #startGame{
-       height: 80px;
-   }
-   #bg{
-       background-image: url("../images/img-4.png");
-       background-size: 88%;
-       background-repeat: no-repeat;
-       height: 712px;
-       
-   }
-   .btn.btn-primary.btn-lg{
-       margin-left: 104px;
-       background-color: gray;
-       border-color: grey;
-   }
-   .float-right {
-       height: 100px;
-   }
-   #deck{
-       height: 146px;
-   }
-   #oArea{
-       height: 150px;
-   }
-   .card{
-       width: 10rem;
-       
-       margin-left: 78px;
-   }
+    font-size: 150%;
+}
+
+#sbr1{
+    height: 200px;
+}
+#playerInfo{
+    height: 85px;
+    margin: 9px;
+  
+}
+#player{
+    height: 55px;
+    margin-top: 12px;
+    margin-left: 34px;
+    margin-right: 88px;
+    background-image: url("../images/img-3.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+#opponent{
+    height:57px;
+    margin-top: 12px;
+    margin-left: 41px;
+    margin-right: 79px;
+    background-image: url("../images/img-3.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+#sbr2{
+    height:202px;
+}
+#countBox{
+    height: 500px;
+}
+#numRounds{
+    height: 180px;
+}
+#numLeft{
+    margin-top: 12px;
+    height:57px;
+    margin-left: 41px;
+    margin-right: 79px;
+    background-image: url("../images/img-3.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+#oppInfo{
+    height: 85px;
+}
+#rounds{
+   height:105px;
+}
+#score1{
+    height: 150px;
+    margin-left: 27px;
+}
+#pWins{
+    height:65px;
+    background-image: url("../images/img-1.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+#oWins{
+    height:65px;
+    background-image: url("../images/img-1.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+#sbr3{
+    height: 65px;
+}
+#startGame{
+    height: 80px;
+}
+#bg{
+    background-image: url("../images/img-4.png");
+    background-size: 88%;
+    background-repeat: no-repeat;
+    height: 712px;
+    
+}
+.btn.btn-primary.btn-lg{
+    margin-left: 104px;
+    background-color: gray;
+    border-color: grey;
+    width: 143px;
+}
+.float-right {
+    height: 100px;
+}
+#deck{
+    height: 146px;
+}
+#oArea{
+    height: 150px;
+}
+.card{
+    width: 10rem;
+    
+    margin-left: 78px;
+}
+
+.card-body{
    
-   .card-body{
-      
-       height:162px;
-       background-image: url("../images/img-9.png");
-       background-size: 100%;
-       background-repeat: no-repeat;
-   }
-   .card-body1{
-       
-       height:150px;
-       background-image: url("../images/img-7-1.png");
-       background-size: 100%;
-       background-repeat: no-repeat;
-   }
-   #play{
-       height: 300px;
-   }
-   #deck1{
-       height: 200px;
-   }
-   #pArea{
-       height: 150px;
-       margin-top: 35px;
-      
-   }
-   .oCards{
-       margin-top: 45px;
-       height:150px;
-   }
+    height:162px;
+    background-image: url("../images/img-9.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+.card-body1{
+    
+    height:150px;
+    background-image: url("../images/img-7-1.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+#play{
+    height: 300px;
+}
+#deck1{
+    height: 200px;
+}
+#pArea{
+    height: 150px;
+    margin-top: 35px;
+   
+}
+.oCards{
+    margin-top: 45px;
+    height:150px;
+}
