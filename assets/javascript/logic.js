@@ -76,7 +76,7 @@ function getMovieInfo(movieID) {
         var moviePoster = data.Poster;
         var movieTitle = data.Title;
             movieTitle = movieTitle.toLowerCase();
-        var cardValue = parseInt(data.imdbRating) * 10;
+        var cardValue = parseFloat(data.imdbRating) * 10;
 
         var moviePlot = data.Plot;
         var movieActors = data.Actors;
