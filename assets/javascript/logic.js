@@ -6,8 +6,8 @@ $(document).ready(function() {
 
     $("#pCard1").on("click", function() {
         if ($(".clicked") !== false) {
-            $(".clicked").css( "zIndex", -1 );
-           
+            $(".clicked").css( "zIndex", -10 );
+            $(".clicked").animate({ top: "0px", left:"0px"  }, "normal");
         }
       cardplayed.animate({ top: "-=250px", left:"120px"  }, "normal");
       $("#oCard51").removeClass("card-body1");
@@ -25,8 +25,8 @@ $(document).ready(function() {
 
     $("#pCard2").on("click", function() {
         if ($(".clicked") !== false) {
-            $(".clicked").css( "zIndex", -1 );
-           
+            $(".clicked").css( "zIndex", -10 );
+            $(".clicked").animate({ top: "0px", left:"0px"  }, "normal");
         }
       cardplayed2.animate({ top: "-=250px", left:"-=71px"  }, "normal");
       $("#oCard41").removeClass("card-body1");
@@ -44,8 +44,8 @@ $(document).ready(function() {
     
         $("#pCard3").on("click", function() {
             if ($(".clicked") !== false) {
-                $(".clicked").css( "zIndex", -1 );
-               
+                $(".clicked").css( "zIndex", -10 );
+                $(".clicked").animate({ top: "0px", left:"0px"  }, "normal");
             }
           cardplayed4.animate({ top: "-=250px", left:"-=260px"  }, "normal");
           $("#oCard31").removeClass("card-body1");
@@ -63,8 +63,8 @@ $(document).ready(function() {
     
         $("#pCard4").on("click", function() {
             if ($(".clicked") !== false) {
-                $(".clicked").css( "zIndex", -1 );
-               
+                $(".clicked").css( "zIndex", -10 );
+                $(".clicked").animate({ top: "0px", left:"0px"  }, "normal");
             }
           cardplayed6.animate({ top: "-=250px", left:"-=447px"  }, "normal");
           $("#oCard21").removeClass("card-body1");
@@ -82,8 +82,8 @@ $(document).ready(function() {
 
     $("#pCard5").on("click", function() {
         if ($(".clicked") !== false) {
-            $(".clicked").css( "zIndex", -1 );
-           
+            $(".clicked").css( "zIndex", -10 );
+            $(".clicked").animate({ top: "0px", left:"0px"  }, "normal");
         }
       cardplayed8.animate({ top: "-=250px", left:"-=636px"  }, "normal");
       $("#oCard11").removeClass("card-body1");

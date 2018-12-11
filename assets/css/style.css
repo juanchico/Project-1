@@ -1,5 +1,7 @@
 body{
-    background-color: black;
+    background-image: url("../images/bg.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
  font-family: 'Indie Flower', cursive;
 font-size: 150%;
 }
