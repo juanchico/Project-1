@@ -27,6 +27,10 @@ var alreadySelected = [];
 var ytPlayerSRC = "https://www.youtube.com/embed/";
 var ytPlayerId;
 var dbIndex = 0;
+var numRound = 1;
+var P1Score = 0;
+var P2Score = 0;
+var roundsLeft = 4;
 
 // ***************************************
 
@@ -126,6 +130,13 @@ function pullTrailer(movie) {
 
 function dealCards() {
 
+    roundRef = firebase.ref("/round/" + numRound);
+    roundRef.set({
+        P1Score: P1Score,
+        P2Score: P2Score,
+        RoundsRem: roundsLeft
+    });
+
     for (var i = 1; i <= 5; i++) {
 
         var cardIMG = $("<img>").attr("src", moviePosterURLs[i - 1]);
@@ -134,6 +145,16 @@ function dealCards() {
         $("#card-bodyP" + i).html(cardIMG);
         $("#oCard" + i).css("display", "block");
         $("#pCard" + i).css("display", "block");
+    }
+}
+
+function nextRound() {
+
+    numRound++;
+    firebase.ref("/round/" + numRound);
+
+    for (var i = 1; i <= (5 * numRound); i++) {
+
     }
 }
 
