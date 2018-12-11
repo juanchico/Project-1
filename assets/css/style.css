@@ -1,18 +1,20 @@
-body{
+body {
     background-color: black;
     font-family: 'Indie Flower', cursive;
     font-size: 150%;
 }
 
-#sbr1{
+#sbr1 {
     height: 200px;
 }
-#playerInfo{
+
+#playerInfo {
     height: 85px;
     margin: 9px;
   
 }
-#player{
+
+#player {
     height: 55px;
     margin-top: 12px;
     margin-left: 34px;
@@ -21,7 +23,8 @@ body{
     background-size: 100%;
     background-repeat: no-repeat;
 }
-#opponent{
+
+#opponent {
     height:57px;
     margin-top: 12px;
     margin-left: 41px;
@@ -30,16 +33,20 @@ body{
     background-size: 100%;
     background-repeat: no-repeat;
 }
-#sbr2{
+
+#sbr2 {
     height:202px;
 }
-#countBox{
+
+#countBox {
     height: 500px;
 }
-#numRounds{
+
+#numRounds {
     height: 180px;
 }
-#numLeft{
+
+#numLeft {
     margin-top: 12px;
     height:57px;
     margin-left: 41px;
@@ -48,88 +55,114 @@ body{
     background-size: 100%;
     background-repeat: no-repeat;
 }
-#oppInfo{
+
+#oppInfo {
     height: 85px;
 }
-#rounds{
+
+#rounds {
    height:105px;
 }
-#score1{
+
+#score1 {
     height: 150px;
     margin-left: 27px;
 }
-#pWins{
+
+#pWins {
     height:65px;
     background-image: url("../images/img-1.png");
     background-size: 100%;
     background-repeat: no-repeat;
 }
-#oWins{
+
+#oWins {
     height:65px;
     background-image: url("../images/img-1.png");
     background-size: 100%;
     background-repeat: no-repeat;
 }
-#sbr3{
+
+#sbr3 {
     height: 65px;
 }
-#startGame{
+
+#startGame {
     height: 80px;
 }
-#bg{
+
+#bg {
     background-image: url("../images/img-4.png");
-    background-size: 88%;
+    background-size: contain;
     background-repeat: no-repeat;
     height: 712px;
     
 }
-.btn.btn-primary.btn-lg{
+
+.btn.btn-primary.btn-lg {
     margin-left: 104px;
     background-color: gray;
     border-color: grey;
     width: 143px;
 }
+
 .float-right {
     height: 100px;
 }
-#deck{
+
+#deck {
     height: 146px;
 }
-#oArea{
+
+#oArea {
     height: 150px;
 }
-.card{
-    width: 10rem;
-    
+
+.card {
+    width: 111px;
     margin-left: 78px;
 }
 
-.card-body{
-   
+#card-bodyP1, #card-bodyP2, #card-bodyP3, #card-bodyP4, #card-bodyP5 {
+    display: flex;
+    flex-wrap: nowrap;
     height:162px;
     background-image: url("../images/img-9.png");
     background-size: 100%;
     background-repeat: no-repeat;
 }
-.card-body1{
-    
+
+#card-bodyP1 img, #card-bodyP2 img, #card-bodyP3 img, #card-bodyP4 img, #card-bodyP5 img {
+    max-width:100%;
+}
+
+.card-bodyO {
+    display: flex;
+    flex-wrap: nowrap;
     height:150px;
     background-image: url("../images/img-7-1.png");
     background-size: 100%;
     background-repeat: no-repeat;
 }
-#play{
+
+#play {
     height: 300px;
 }
-#deck1{
+
+#deck1 {
     height: 200px;
 }
-#pArea{
+
+#pArea {
     height: 150px;
     margin-top: 35px;
-   
 }
-.oCards{
+
+.oCards {
     margin-top: 45px;
     height:150px;
+}
+
+#pCard1, #pCard2, #pCard3, #pCard4, #pCard5, #oCard1, #oCard2, #oCard3, #oCard4, #oCard5 {
+    display: none;
 }

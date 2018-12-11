@@ -22,6 +22,7 @@ var titleChoice;
 var movieCards = [];
 var movieName = [];
 var movieTrailers = [];
+var moviePosterURLs = [];
 var alreadySelected = [];
 var ytPlayerSRC = "https://www.youtube.com/embed/";
 var ytPlayerId;
@@ -89,6 +90,7 @@ function getMovieInfo(movieID) {
         if ($.inArray(movieTitle, movieCards) === -1) {
             movieCards.push(movieTitle);
             movieName.push(data.Title);
+            moviePosterURLs.push(moviePoster);
         }
     });
 }
@@ -124,19 +126,35 @@ function pullTrailer(movie) {
 
 function dealCards() {
 
+    for (var i = 1; i <= 5; i++) {
+
+        var cardIMG = $("<img>").attr("src", moviePosterURLs[i - 1]);
+
+        $("#card-bodyP" + i).attr("data-index", (i - 1));
+        $("#card-bodyP" + i).html(cardIMG);
+        $("#oCard" + i).css("display", "block");
+        $("#pCard" + i).css("display", "block");
+    }
 }
+
 // ***************************************
 
 // GAME / PAGE LOGIC
 
-$(document).on("click", "#gameStart", pullCards);
+pullCards();
 
-$(document).on("click", "#pCard1", function() {
+$(document).on("click", "#gameStart", function() {
+    
+    dealCards();
 
-    movieRef.on("value", function(snapshot) {
-        console.log(snapshot.val());
-    });
 });
+
+// $(document).on("click", "#pCard1", function() {
+
+//     firebase.ref("/cardDeck/" + 4).once("value").then(function(snapshot) {
+//         console.log(snapshot.val());
+//     });
+// });
 
 // CREATE onClick function to set TrailerID attribute to corresponding card in Firebase when movie is selected.
 
