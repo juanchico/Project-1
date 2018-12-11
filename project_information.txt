@@ -1,0 +1,171 @@
+OMBD API Information:
+
+apikey = "trilogy";
+
+movie = // FIXME: 
+
+movQueryURL = "http://www.omdbapi.com/?apikey=" + apikey + "&s=" + movie + [ANY ADD'L QUERY PARAMs];
+
+
+
+{Example: http://www.omdbapi.com/?apikey=trilogy&s=jaws}
+
+
+titleTerms = [dead, night, house, dark, space, star, man, time, alien, world, moon, planet, earth, lost, wild, love, show, comedy, life, day, little, girl, big, west, trail, cowboy, kid, law, adventure, island, heart, story, woman];
+
+
+
+***Total Results Check to determine subsequent API call for randomization***
+
+
+
+YouTube API Information:
+
+key= "AIzaSyAGgOJzbjOxlwnCxoTjgLog-j9mbFCQm4o";
+
+trailer = movie.title
+
+trailerQueryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=1&key=" + key + "&q=" + trailer + "official+trailer";
+
+
+
+QC:
+
+https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=1&key=AIzaSyAGgOJzbjOxlwnCxoTjgLog-j9mbFCQm4o&q=the+dark+knight+official+trailer
+
+
+
+https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&key=AIzaSyAGgOJzbjOxlwnCxoTjgLog-j9mbFCQm4o&q=fight+club+official+trailer&maxResults=1
+
+
+https://www.googleapis.com/youtube/v3/videos?key=AIzaSyAGgOJzbjOxlwnCxoTjgLog-j9mbFCQm4o&type=video&videoDefinition=hih&part=snippet&chart=mostPopular&q=titanic+movie
+
+https://www.googleapis.com/youtube/v3/search?part=snippet&q=titanic+movie+trailer&type=video&key=AIzaSyAGgOJzbjOxlwnCxoTjgLog-j9mbFCQm4o
+
+
+
+
+Firebase Script Links:
+
+<script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
+
+var config = {
+	apiKey: "AIzaSyCVl0c45n98QSMuCYWp2v6P2VKLXOCfMNE",
+	authDomain: "project-1-movie-cards.firebaseapp.com",
+	databaseURL: "https://project-1-movie-cards.firebaseio.com",
+	projectId: "project-1-movie-cards",
+	storageBucket: "project-1-movie-cards.appspot.com",
+	messagingSenderId: "708108457592"
+};
+
+firebase.initializeApp(config);
+
+
+firebase.database().ref().on("value", function(snapshot) {
+	console.log(snapshot.val());
+});
+
+var database = firebase.database();
+var chatData = database.ref("/chat");
+var playersRef = database.ref("/players");
+var currentTurnRef = database.ref("/turn");
+
+var username = "Guest";
+var currentPlayers = null;
+var currentTurn = null;
+var playerNum = false;
+var playerOneExists = false;
+var playerTwoExists = false;
+var playerOneData = null;
+var playerTwoData = null;
+
+
+---------------------------
+
+General Modal JS Code:
+
+var modal = $("#popUp")[0];
+
+$("#showModal").on("click", function() {
+    $("#popUp").css("display", "block");
+});
+
+$(".close").on("click", function() {
+    $("#popUp").css("display", "none");
+});
+
+$(window).on("click", function(event) {
+
+    if (event.target === modal) {
+        $("#popUp").css("display", "none");
+    }
+});
+
+---------------------------
+
+General Modal HTML Code:
+
+<div id="popUp" class="modal">
+	<div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Hi there! I'm a modal!</p>
+        </div>
+</div>
+
+---------------------------
+
+General Modal CSS Code:
+
+/* The Modal (background) */
+.modal {
+display: none; /* Hidden by default */
+position: fixed; /* Stay in place */
+z-index: 1; /* Sit on top */
+left: 0;
+top: 0;
+width: 100%; /* Full width */
+height: 100%; /* Full height */
+overflow: auto; /* Enable scroll if needed */
+background-color: rgb(0,0,0); /* Fallback color */
+background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+  
+/* Modal Content/Box */
+.modal-content {
+background-color: #fefefe;
+margin: 15% auto; /* 15% from the top and centered */
+padding: 20px;
+border: 1px solid #888;
+width: 80%; /* Could be more or less, depending on screen size */
+}
+  
+/* The Close Button */
+.close {
+color: #aaa;
+float: right;
+font-size: 28px;
+font-weight: bold;
+}
+  
+.close:hover,
+.close:focus {
+color: black;
+text-decoration: none;
+cursor: pointer;
+}
+
+
+----------------------
+
+**Each card object will possess the following attributes:
+
+1. Poster
+2. Movie Title
+3. IMDB Rating x 10
+
+4. Plot Short (on hover)
+5. Plot Actors (on hover)
+6. Runtime (on hover)
+7. Release Date (on hover)
+8. Rated (on hover)
+9. Rotten Tomatoes?! (if so, on hover)
