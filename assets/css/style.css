@@ -138,7 +138,13 @@ body {
 
 #card-bodyP1 img, #card-bodyP2 img, #card-bodyP3 img, #card-bodyP4 img, #card-bodyP5 img {
     max-width:100%;
+    border: 1px solid #333333;
+    border-radius: 5px;
 }
+
+/* #card-bodyP1 img:hover, #card-bodyP2 img:hover, #card-bodyP3 img:hover, #card-bodyP4 img:hover, #card-bodyP5 img:hover {
+
+} */
 
 .card-bodyO {
     display: flex;
@@ -169,4 +175,46 @@ body {
 
 #pCard1, #pCard2, #pCard3, #pCard4, #pCard5, #oCard1, #oCard2, #oCard3, #oCard4, #oCard5 {
     display: none;
+}
+
+.bottom-left {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    padding: 2.5px;
+    border-top-right-radius: 15px;
+    text-align: center;
+    border-right: 1px solid #333333;
+    border-top: 1px solid #333333;
+    background-color: #ffffffaf;
+    font-weight: bold;
+    font-size: 32px;
+}
+
+.top-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 2.5px;
+    border-bottom-left-radius: 15px;
+    text-align: center;
+    border-left: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+    background-color: #ffffffaf;
+    font-weight: bold;
+    font-size: 32px;
+}
+
+.gameCard {
+    border-radius: 5px;
+    filter: grayscale(75%);
+}
+
+.gameCard:hover {
+    cursor: pointer;
+    box-shadow: 4px 4px 4px #333333;
+    filter: grayscale(0%);
+    transition: filter 250ms;
 }

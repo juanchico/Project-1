@@ -15,12 +15,13 @@ firebase.initializeApp(config);
 // GLOBAL VARIABLES
 
 // IMDB IDs
-var imdbIDs = ["tt0170016", "tt0314331", "tt0241527", "tt0319343", "tt0309987", "tt0338348", "tt0468569", "tt0120737", "tt1099212", "tt0367594", "tt0330373", "tt0377092", "tt0479143", "tt0304669", "tt0361748", "tt0477348", "tt0304141", "tt0167260", "tt1067106", "tt0317705", "tt0388419", "tt0454945", "tt0172495", "tt0409459", "tt0206634", "tt0482571", "tt0218967", "tt0307987", "tt0167261", "tt0486583", "tt0338013", "tt0416449", "tt0217869", "tt0401792", "tt0268978", "tt0110357", "tt0099785", "tt0111070", "tt0111161", "tt0110912", "tt0120338", "tt0108052", "tt0109830", "tt0104431", "tt0112573", "tt0099685", "tt0107290", "tt0133093", "tt0102926", "tt0118715", "tt0107688", "tt0137523", "tt0119217", "tt0118749", "tt0116282", "tt0114369", "tt0120815", "tt0117737", "tt0103874", "tt0102798", "tt0113277", "tt0119116", "tt0119303", "tt0114709", "tt0103064", "tt0117509", "tt0103639", "tt0097958", "tt0085334", "tt0089927", "tt0095560", "tt0093389", "tt0095016", "tt0093779", "tt0093058", "tt0088763", "tt0083658", "tt0093773", "tt0086250", "tt1213644", "tt0270846", "tt0060666", "tt0804492", "tt1316037", "tt0317676", "tt0417056", "tt0339034", "tt0362165", "tt0369226", "tt0185183", "tt0096870", "tt0299930", "tt01186653", "tt00933005", "tt03832227", "tt1883367", "tt0804452", "tt4877122", "tt0115624", "tt0110978", "tt1666186", "tt0120185", "tt0400426", "tt0795461", "tt5690360", "tt1411664", "tt0450345", "tt0119707", "tt0372873", "tt0897361", "tt0120179", "tt0157262", "tt0811138", "tt0111301", "tt0291502", "tt0180052", "tt0094824", "tt0926129", "tt0107978", "tt0108255", "tt0479968", "tt0806147", "tt2278388", "tt0091064", "tt0116629", "tt3501632", "tt3896198", "tt0362270", "tt0097257"];
+var imdbIDs = ["tt0170016", "tt0314331", "tt0241527", "tt0319343", "tt0309987", "tt0338348", "tt0468569", "tt0120737", "tt1099212", "tt0367594", "tt0330373", "tt0377092", "tt0479143", "tt0304669", "tt0361748", "tt0477348", "tt0304141", "tt0167260", "tt1067106", "tt0317705", "tt0388419", "tt0454945", "tt0172495", "tt0409459", "tt0206634", "tt0482571", "tt0218967", "tt0307987", "tt0167261", "tt0486583", "tt0338013", "tt0416449", "tt0217869", "tt0401792", "tt0268978", "tt0110357", "tt0099785", "tt0111070", "tt0111161", "tt0110912", "tt0120338", "tt0108052", "tt0109830", "tt0104431", "tt0112573", "tt0099685", "tt0107290", "tt0133093", "tt0102926", "tt0118715", "tt0107688", "tt0137523", "tt0119217", "tt0118749", "tt0116282", "tt0114369", "tt0120815", "tt0117737", "tt0103874", "tt0102798", "tt0113277", "tt0119116", "tt0119303", "tt0114709", "tt0103064", "tt0117509", "tt0103639", "tt0097958", "tt0085334", "tt0089927", "tt0095560", "tt0093389", "tt0095016", "tt0093779", "tt0093058", "tt0088763", "tt0083658", "tt0093773", "tt0086250", "tt1213644", "tt0270846", "tt0060666", "tt0804492", "tt1316037", "tt0317676", "tt0417056", "tt0339034", "tt0362165", "tt0369226", "tt0185183", "tt0096870", "tt0299930", "tt01186653", "tt00933005", "tt03832227", "tt1883367", "tt0804452", "tt4877122", "tt0115624", "tt0110978", "tt1666186", "tt0120185", "tt0400426", "tt0795461", "tt5690360", "tt1411664", "tt0450345", "tt0119707", "tt0372873", "tt0897361", "tt0120179", "tt0157262", "tt0811138", "tt0111301", "tt0291502", "tt0180052", "tt0094824", "tt0926129", "tt0107978", "tt0108255", "tt0479968", "tt0806147", "tt2278388", "tt0091064", "tt0116629", "tt3501632", "tt3896198", "tt0362270", "tt0097257", "tt5463162", "tt7959026", "tt1571234", "tt7125860", "tt7297030", "tt8267604", "tt5848272", "tt2709692", "tt6343314", "tt4123430", "tt1727824", "tt7401588", "tt6966692", "tt4532826", "tt5734576", "tt4218572"];
 
 var movieCards = [];
 var movieName = [];
 var movieTrailers = [];
 var moviePosterURLs = [];
+var cardValues = [];
 var alreadySelected = [];
 var titleChoice;
 var ytPlayerSRC = "https://www.youtube.com/embed/";
@@ -104,6 +105,7 @@ function getMovieInfo(movieID) {
             movieCards.push(movieTitle);
             movieName.push(data.Title);
             moviePosterURLs.push(moviePoster);
+            cardValues.push(cardValue);
         }
     });
 }
@@ -149,9 +151,12 @@ function dealCards() {
     for (var i = 1; i <= 5; i++) {
 
         var cardIMG = $("<img>").attr("src", moviePosterURLs[i - 1]);
+        var cardValue1 = $("<h3>").text(cardValues[i - 1]).addClass("top-right");
+        var cardValue2 = $("<h3>").text(cardValues[i - 1]).addClass("bottom-left");
 
         $("#card-bodyP" + i).attr("data-index", (i - 1)).addClass("gameCard");
-        $("#card-bodyP" + i).html(cardIMG);
+        $("#card-bodyP" + i).html(cardIMG).append(cardValue1).append(cardValue2);
+
         $("#oCard" + i).css("display", "block");
         $("#pCard" + i).css("display", "block");
     }
@@ -494,7 +499,7 @@ function gameLogic(player1choice, player2choice) {
     else if (player1choice === "Scissors" && player2choice === "Rock") {
         playerTwoWon();
     }
-    
+
     else if (player1choice === "Scissors" && player2choice === "Paper") {
         playerOneWon();
     }
