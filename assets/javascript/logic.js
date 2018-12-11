@@ -1,5 +1,4 @@
 // Firebase Link, Config, Ref Variable Info
-
 var config = {
     apiKey: "AIzaSyC-yY5vNVc5WyXFJ6YOEwXCHmbnzRkbL_g",
     authDomain: "movie-cards-2018.firebaseapp.com",
@@ -32,7 +31,7 @@ var dbIndex = 0;
 
 // FUNCTIONS & API CALLS (OMDB)
 
-function dealCards() {
+function pullCards() {
 
     for (var i = 0;  i < imdbIDs.length; i++) {
         titleChoice = imdbIDs[Math.floor(Math.random() * imdbIDs.length)];
@@ -69,6 +68,8 @@ function getMovieInfo(movieID) {
         movieRef = firebase.ref("/cardDeck/" + dbIndex);
         dbIndex++;
 
+        console.log(movieTitle);
+
         // Push movie information to Firebase
         movieRef.set({
             Poster: moviePoster,
@@ -80,6 +81,10 @@ function getMovieInfo(movieID) {
             Runtime: movieRuntime,
             Release: movieRelease
         });
+
+        // movieRef.on("value", function(snapshot) {
+        //     console.log(snapshot.val().Title);
+        // });
 
         if ($.inArray(movieTitle, movieCards) === -1) {
             movieCards.push(movieTitle);
@@ -116,57 +121,67 @@ function pullTrailer(movie) {
         }
     });
 }
+
+function dealCards() {
+
+}
 // ***************************************
 
 // GAME / PAGE LOGIC
 
-dealCards();
+$(document).on("click", "#gameStart", pullCards);
+
+$(document).on("click", "#pCard1", function() {
+
+    movieRef.on("value", function(snapshot) {
+        console.log(snapshot.val());
+    });
+});
 
 // CREATE onClick function to set TrailerID attribute to corresponding card in Firebase when movie is selected.
 
 
-
 // Test modal (onClick) logic
-$(document).on("click", "#playMovie", function() {
+// $(document).on("click", "#playMovie", function() {
 
-    for (var i = 0; i < 10; i++) {
-        var mov = $("<button>").html(movieName[i]).attr("data-title", movieName[i]).attr("data-index", i);
+//     for (var i = 0; i < 10; i++) {
+//         var mov = $("<button>").html(movieName[i]).attr("data-title", movieName[i]).attr("data-index", i);
 
-        $("#movie-list").append(mov);
-    }
+//         $("#movie-list").append(mov);
+//     }
 
-    $("#movie-list > button").on("click", function() {
+//     $("#movie-list > button").on("click", function() {
 
-        console.log(this);
+//         console.log(this);
 
-        var movtitle = $(this).attr("data-title").toLowerCase();
+//         var movtitle = $(this).attr("data-title").toLowerCase();
 
-        pullTrailer(movtitle);
+//         pullTrailer(movtitle);
 
-        setTimeout(function() {
+//         setTimeout(function() {
 
-            $("#ytplayer").attr("src", ytPlayerSRC + ytPlayerId);
-        }, 1000 * 0.5);
-    });
+//             $("#ytplayer").attr("src", ytPlayerSRC + ytPlayerId);
+//         }, 1000 * 0.5);
+//     });
 
-    var modal = $(".modal");
-    var btn = $("#movie-list > button");
-    var exit = $("#close");
+//     var modal = $(".modal");
+//     var btn = $("#movie-list > button");
+//     var exit = $("#close");
 
-    btn.on("click", function() {
-        setTimeout(function() {
-            modal.css("display", "block");
-        }, 1000 * 0.5);
-    });
+//     btn.on("click", function() {
+//         setTimeout(function() {
+//             modal.css("display", "block");
+//         }, 1000 * 0.5);
+//     });
 
-    exit.on("click", function() {
-        modal.css("display", "none");
-    });
+//     exit.on("click", function() {
+//         modal.css("display", "none");
+//     });
 
-    $(window).on("click", function(event) {
+//     $(window).on("click", function(event) {
 
-        if (event.target === modal[0]) {
-            modal.css("display", "none");
-        }
-    });
-});
+//         if (event.target === modal[0]) {
+//             modal.css("display", "none");
+//         }
+//     });
+// });
