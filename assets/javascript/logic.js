@@ -1,3 +1,18 @@
+
+
+$(document).ready(function() {
+   $(".popup-overlay, .popup-content").addClass("active");
+});
+$(document).on("click", ".join", function() {
+    if ($("#PlayerName").val() !== "") {
+
+    $(".popup-overlay, .popup-content").removeClass("active");
+    var nameP = $("#PlayerName").val();
+    console.log(nameP);
+    $("#player").text(nameP);
+}
+});
+
 // Firebase Link & Config
 var config = {
     apiKey: "AIzaSyC-yY5vNVc5WyXFJ6YOEwXCHmbnzRkbL_g",
@@ -50,6 +65,7 @@ var playerTwoData = null;
 
 // FUNCTIONS & API CALLS (OMDB)
 
+ 
 function pullCards() {
 
     for (var i = 0;  i < imdbIDs.length; i++) {
@@ -280,7 +296,8 @@ pullCards();
 
 // Listeners for Usernames
 $("#start").click(function() {
-
+    console.log(1);
+    $(".popup-overlay, .popup-content").removeClass("active");
     if ($("#username").val() !== "") {
 
         username = capitalize($("#username").val());
@@ -612,7 +629,12 @@ function gameLogic(player1choice, player2choice) {
 $(document).on("click", "#gameStart", function() {
     
     dealCards();
+   // $(".popup-overlay, .popup-content").addClass("active");
+});
 
+//removes the "active" class to .popup and .popup-content when the "Close" button is clicked 
+$(document).on("click", ".close", function() {
+    $(".popup-overlay, .popup-content").removeClass("active");
 });
 
 // CREATE onClick function to set TrailerID attribute to corresponding card in Firebase when movie is selected.
