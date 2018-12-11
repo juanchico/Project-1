@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
-<script>
-  WebFont.load({
-    google: {
-      families: ['Indie Flower', 'Droid Serif']
-    }
-  });
-</script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script>
+        WebFont.load({
+            google: {
+                families: ['Indie Flower', 'Droid Serif']
+            }
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+        <script src="assets/javascript/logic.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <title>Project 1</title>
@@ -20,47 +25,51 @@
 
 <body>
     <div class="row" class="container-fluid" id="container">
-            <div id="sb" class="col-md-3">
-                <div class="row" id="sbr1">
-                    <div id="gameScore" class="col-md-12">
-                        <div class="row">
-                            <div id="playerInfo" class="col-md-12">
-                                <div id="player" class="alert alert-secondary" role="alert">Player Name <span id="pScore" class="float-right">Number</span></div>
-                           </div> 
-                        </div> 
-                        <div class="row">
-                           <div id="oppInfo" class="col-md-12">
-                                <div id="opponent" class="alert alert-secondary" role="alert" >Opponent Name <span id="oScore" class="float-right">Number</span> </div>
-                           </div>
+        <div id="sb" class="col-md-3">
+            <div class="row" id="sbr1">
+                <div id="gameScore" class="col-md-12">
+                    <div class="row">
+                        <div id="playerInfo" class="col-md-12">
+                            <div id="player" class="alert alert-secondary" role="alert">Player Name <span id="pScore"
+                                    class="float-right">Number</span></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div id="oppInfo" class="col-md-12">
+                            <div id="opponent" class="alert alert-secondary" role="alert">Opponent Name <span id="oScore"
+                                    class="float-right">Number</span> </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="row" id="sbr2">
-                        <div id="countBox" class="col-md-12">
-                            <div class="row" id="rounds">
-                               <div id="numRounds" class="col-md-12" >
-                                    <div id="numLeft" class="alert alert-secondary" role="alert" >#numLeft</div>
-                               </div> 
-                            </div> 
-                            <div class="row" id="score1">
-                               <div id="numWins" class="col-sm-5">
-                                    <div id="pWins" class="alert alert-secondary" role="alert">#pWins<span  class="float-right">Number</span> </div>
-                               </div>
-                                <div id="oppInfo" class="col-sm-5">
-                                    <div id="oWins" class="alert alert-secondary" role="alert" >#oWins <span  class="float-right">Number</span> </div>     
-                                </div>
-                                <img src="../Project-1/assets/images/img-10.png" alt="Teathre">
-                            </div>
+            <div class="row" id="sbr2">
+                <div id="countBox" class="col-md-12">
+                    <div class="row" id="rounds">
+                        <div id="numRounds" class="col-md-12">
+                            <div id="numLeft" class="alert alert-secondary" role="alert">#numLeft</div>
                         </div>
                     </div>
+                    <div class="row" id="score1">
+                        <div id="numWins" class="col-sm-5">
+                            <div id="pWins" class="alert alert-secondary" role="alert">#pWins<span class="float-right">Number</span>
+                            </div>
+                        </div>
+                        <div id="oppInfo" class="col-sm-5">
+                            <div id="oWins" class="alert alert-secondary" role="alert">#oWins <span class="float-right">Number</span>
+                            </div>
+                        </div>
+                        <img src="../Project-1/assets/images/img-10.png" alt="Teathre">
+                    </div>
+                </div>
+            </div>
 
-                    <div class="row" id="sbr3">
-                            <div id="startPreview" class="col-md-12">
-                                <div class="row">
-                                    <div id="startGame" class="col-md-12">
-                                        <div id="start" id="startOver">
-                                             <!-- 
+            <div class="row" id="sbr3">
+                <div id="startPreview" class="col-md-12">
+                    <div class="row">
+                        <div id="startGame" class="col-md-12">
+                            <div id="start" id="startOver">
+                                <!-- 
                                             The YouTube movie trailer modal (#previewModal) appears when a player selects a movie in their deck and is contained within a container <div> name #preview
                                             $('#previewModal').on('show.pCard.modal', function (e) {
                                             if (!data) return e.preventDefault() // stops modal from being shown
@@ -71,112 +80,112 @@
                                             Documentation [2]: Above code is an example of JS/jQuery of modal behavior as a placeholder.
                                             Documentation [3]: Code may or may not be a Modal. TBD.
                                             -->
-                                        <button type="button" class="btn btn-primary btn-lg">START</button></div>
-                                   </div> 
-                                </div> 
-                             
+                                <button type="button" class="btn btn-primary btn-lg">START</button></div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-        </div>      
+        </div>
 
         <div id="bg" class="col-md-9">
-                <div class=row id="deck">
-                    <span id="oDeck"> 
+            <div class=row id="deck">
+                <span id="oDeck">
                     <div id="oArea" class="col-md-12">
                         <div class=row>
                             <div class="oCards" class="col-md-2.2">
-                                    <div class="card" id="oCard1">
-                                            <div class="card-body1">
-                                              <h5 class="card-title" id="cardMovie1"></h5>
-                                            </div>
-                                          </div>
+                                <div class="card" id="oCard1">
+                                    <div class="card-body1" id="oCard11">
+                                        <h5 class="card-title" id="cardMovie1"></h5>
+                                    </div>
+                                </div>
                             </div>
                             <div class="oCards" class="col-md-2.2">
-                                    <div class="card" id="oCard2">
-                                            <div class="card-body1">
-                                              <h5 class="card-title" id="cardMovie2"></h5>
-                                            </div>
-                                          </div>
+                                <div class="card"  id="oCard2">
+                                    <div class="card-body1" id="oCard21">
+                                        <h5 class="card-title" id="cardMovie2"></h5>
+                                    </div>
+                                </div>
                             </div>
                             <div class="oCards" class="col-md-2.2">
-                                    <div class="card" id="oCard3">
-                                            <div class="card-body1">
-                                                    <h5 class="card-title" id="cardMovie3"></h5>
-                                                  </div>
-                                          </div>
+                                <div class="card" id="oCard3">
+                                    <div class="card-body1" id="oCard31">
+                                        <h5 class="card-title" id="cardMovie3"></h5>
+                                    </div>
+                                </div>
                             </div>
                             <div class="oCards" class="col-md-2.2">
-                                    <div class="card" id="oCard4" >
-                                            <div class="card-body1">
-                                                    <h5 class="card-title" id="cardMovie4"></h5>
-                                                  </div>
-                                          </div>
+                                <div class="card" id="oCard4">
+                                    <div class="card-body1"  id="oCard41">
+                                        <h5 class="card-title" id="cardMovie4"></h5>
+                                    </div>
+                                </div>
                             </div>
                             <div class="oCards" class="col-md-2.2">
-                                    <div class="card" id="oCard5">
-                                            <div class="card-body1">
-                                                    <h5 class="card-title" id="cardMovie5"></h5>
-                                                  </div>
-                                          </div>
+                                <div class="card" id="oCard5">
+                                    <div class="card-body1"  id="oCard51">
+                                        <h5 class="card-title" id="cardMovie5"></h5>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    
+
                 </span>
-                </div>
+            </div>
 
-                <br>
-                <div class=row id="play"></div>
-                <div  id="playArea" class="col-md-12">
-            
-                </div>
-        
+            <br>
+            <div class=row id="play"></div>
+            <div id="playArea" class="col-md-12">
 
-                <div class=row id="deck1">
-                        <span id="pDeck"> 
-                        <div id="pArea" class="col-md-12">
-                            <div class=row>
-                                <div class="pCards" class="col-md-2.2">
-                                        <div class="card" id="pCard1">
-                                                <div class="card-body">
-                                                  <h5 class="card-title" id="cardMovie1">.pCard</h5>
-                                                </div>
-                                              </div>
-                                </div>
-                                <div class="pCard" class="col-md-2.2">
-                                        <div class="card" id="pCard2">
-                                                <div class="card-body">
-                                                  <h5 class="card-title" id="cardMovie2">.pCard</h5>
-                                                </div>
-                                              </div>
-                                </div>
-                                <div class="pCard" class="col-md-2.2">
-                                        <div class="card" id="pCard3">
-                                                <div class="card-body">
-                                                        <h5 class="card-title" id="cardMovie3">.pCard</h5>
-                                                      </div>
-                                              </div>
-                                </div>
-                                <div class="pCard" class="col-md-2.2">
-                                        <div class="card" id="pCard4">
-                                                <div class="card-body">
-                                                        <h5 class="card-title" id="cardMovie4">.pCard</h5>
-                                                      </div>
-                                              </div>
-                                </div>
-                                <div class="pCard" class="col-md-2.2">
-                                        <div class="card" id="pCard5">
-                                                <div class="card-body">
-                                                        <h5 class="card-title" id="cardMovie5">.pCard</h5>
-                                                      </div>
-                                              </div>
+            </div>
+
+
+            <div class=row id="deck1">
+                <span id="pDeck">
+                    <div id="pArea" class="col-md-12">
+                        <div class=row>
+                            <div class="pCards" class="col-md-2.2">
+                                <div class="card" id="pCard1">
+                                    <div class="card-body">
+                                        <h5 class="card-title" id="cardMovie1">.pCard 1</h5>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="pCard" class="col-md-2.2">
+                                <div class="card" id="pCard2">
+                                    <div class="card-body">
+                                        <h5 class="card-title" id="cardMovie2">.pCard 2</h5>
+                                    </div>
+                                </div>
                             </div>
-</div>
-</div>
+                            <div class="pCard" class="col-md-2.2">
+                                <div class="card" id="pCard3">
+                                    <div class="card-body">
+                                        <h5 class="card-title" id="cardMovie3">.pCard 3</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pCard" class="col-md-2.2">
+                                <div class="card" id="pCard4">
+                                    <div class="card-body">
+                                        <h5 class="card-title" id="cardMovie4">.pCard 4</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pCard" class="col-md-2.2">
+                                <div class="card" id="pCard5">
+                                    <div class="card-body">
+                                        <h5 class="card-title" id="cardMovie5">.pCard 5</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
 
- <!-- 
+        <!-- 
     The YouTube movie trailer modal (#trailerModal) appears when a winner is selected and is contained within a container <div> named #trailer.
         $('#trailerModal').on('show.(pTrailer || oTrailer).modal')
             Documentation [0]: Above is the YouTube movie trailer modal that pops up with the winner's selected movie.
@@ -186,4 +195,5 @@
 -->
 
 </body>
+
 </html>
