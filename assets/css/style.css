@@ -189,7 +189,21 @@ font-size: 150%;
     font-weight: bold;
     font-size: 32px;
 }
-
+.on-top {
+    position: absolute;
+    top: 63px;
+    right: 29px;
+    margin: 0;
+    padding: 2.5px;
+    border-radius: 5px;
+    text-align: center;
+    border-left: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+    background-color: #ffffffaf;
+    font-weight: bold;
+    font-size: 15px;
+    
+}
 .top-right {
     position: absolute;
     top: 0;

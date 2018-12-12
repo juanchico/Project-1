@@ -169,14 +169,19 @@ function dealCards() {
         var cardIMG = $("<img>").attr("src", moviePosterURLs[i - 1]);
         var cardValue1 = $("<h3>").text(cardValues[i - 1]).addClass("top-right");
         var cardValue2 = $("<h3>").text(cardValues[i - 1]).addClass("bottom-left");
-
+        var buttonPreview = $("<input type='button' value='Preview'>").addClass("on-top").attr("id", "btn-pre");
         $("#card-bodyP" + i).attr("data-index", (i - 1)).addClass("gameCard");
-        $("#card-bodyP" + i).html(cardIMG).append(cardValue1).append(cardValue2);
+        $("#card-bodyP" + i).html(cardIMG).append(cardValue1).append(cardValue2).append(buttonPreview);
 
         $("#oCard" + i).css("display", "block");
         $("#pCard" + i).css("display", "block");
+       
     }
 }
+
+   
+  
+
 
 function nextRound() {
 
@@ -208,7 +213,7 @@ $(document).ready(function() {
       cardplayed1.animate({ bottom: "-=213px", right:"120px"  }, "normal");
       $("#pCard1").addClass("clicked", true);
       $("#oCard5").addClass("clicked", true);
-      
+        $("#imgTheatre").hide();
     });
 });
 $(document).ready(function() {
