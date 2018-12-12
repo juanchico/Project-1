@@ -173,32 +173,38 @@ function getMovieCount() {
     cardDeckRef.once("value").then(function(snapshot) {
 
         numMovies = snapshot.numChildren();
-        console.log(numMovies);
+        console.log("CHILD COUNT: " + numMovies);
+        console.log(snapshot.val());
 
+        
         for (var i = 0; i < numMovies; i++) {
-
-            getMovieSpecs(i);
+            if (snapshot.val()[i] !== undefined) {
+                    
+                moviePosterURLs.push(snapshot.val()[i].Poster);
+                movieCards.push(snapshot.val()[i].Title.toLowerCase());
+                movieName.push(snapshot.val()[i].Title);
+                cardValues.push(snapshot.val()[i].Value);  
+            }
         }
-    });
-
-    setTimeout(dealCardsP2, 1000);
-}
-
-function getMovieSpecs(index) {
-
-    cardDeckRef.once("value").then(function(snapshot) {
-
-        if (snapshot.val()[index].Poster === undefined) {
-            console.log(snapshot.val()[index].Title);
-        }
-        else {
-            moviePosterURLs.push(snapshot.val()[index].Poster);
-            movieCards.push(snapshot.val()[index].Title.toLowerCase());
-            movieName.push(snapshot.val()[index].Title);
-            cardValues.push(snapshot.val()[index].Value);            
-        }
+        
+        dealCardsP2();
     });
 }
+
+// function getMovieSpecs(index) {
+
+//     cardDeckRef.once("value").then(function(snapshot) {
+
+//         console.log(index);
+
+//         if (snapshot.val()[index].Poster === undefined) {
+//             console.log(snapshot.val()[index].Title);
+//         }
+//         else {
+          
+//         }
+//     });
+// }
 
 
 function dealCardsP2() {
