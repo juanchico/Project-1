@@ -31,12 +31,16 @@ var numRound = 1;
 var P1Score = 0;
 var P2Score = 0;
 var roundsLeft = 5 - numRound;
+var numMovies;
+var posterIndex = 0;
 
 // Firebase Refs
 var firebase = firebase.database();
-var playersRef = firebase.ref("/players");
-var currentTurnRef = firebase.ref("/turn");
-var chatData = firebase.ref("/chat");
+var cardDeckRef = firebase.ref("/CardDeck");
+var playersRef = firebase.ref("/Players");
+var currentTurnRef = firebase.ref("/Turn");
+var roundsRef = firebase.ref("/Rounds");
+// var chatData = firebase.ref("/Chat");
 var username = "Guest";
 var currentPlayers = null;
 var currentTurn = null;
@@ -52,7 +56,7 @@ var playerTwoData = null;
 
 function pullCards() {
 
-    for (var i = 0;  i < imdbIDs.length; i++) {
+    for (var i = 0;  i < 60; i++) {
         titleChoice = imdbIDs[Math.floor(Math.random() * imdbIDs.length)];
 
         if ($.inArray(titleChoice, alreadySelected) === -1) {
@@ -84,7 +88,7 @@ function getMovieInfo(movieID) {
         var movieRuntime = data.Runtime.substring(0,3);
         var movieRelease = data.Released;
 
-        movieRef = firebase.ref("/cardDeck/" + dbIndex);
+        movieRef = firebase.ref("/CardDeck/" + dbIndex);
         dbIndex++;
 
         console.log(movieTitle);
@@ -139,14 +143,14 @@ function pullTrailer(movie) {
     });
 }
 
-function dealCards() {
+function dealCardsP1() {
 
-    roundRef = firebase.ref("/round/" + numRound);
-    roundRef.set({
-        P1Score: P1Score,
-        P2Score: P2Score,
-        RoundsRem: roundsLeft
-    });
+    // Remove Join Game Modal, Start Game, and Show Stats
+    $("#modal-row").remove();
+    $("#roundRem").html("Round: " + numRound + " / 5");
+    $("#pWins").html(P1Score);
+    $("#oWins").html(P2Score);
+    $("#numLeft, #oWins, #pWins").css("visibility", "visible");
 
     for (var i = 1; i <= 5; i++) {
 
@@ -160,21 +164,75 @@ function dealCards() {
         $("#oCard" + i).css("display", "block");
         $("#pCard" + i).css("display", "block");
     }
+
+    // dealCardsP2();
+}
+// Ensure Poster Array is in Harmony
+function getMovieCount() {
+
+    cardDeckRef.once("value").then(function(snapshot) {
+
+        numMovies = snapshot.numChildren();
+        console.log(numMovies);
+
+        for (var i = 0; i < numMovies; i++) {
+
+            getMovieSpecs(i);
+        }
+    });
+
+    setTimeout(dealCardsP2, 1000);
+}
+
+function getMovieSpecs(index) {
+
+    cardDeckRef.once("value").then(function(snapshot) {
+
+        if (snapshot.val()[index].Poster === undefined) {
+            console.log(snapshot.val()[index].Title);
+        }
+        else {
+            moviePosterURLs.push(snapshot.val()[index].Poster);
+            movieCards.push(snapshot.val()[index].Title.toLowerCase());
+            movieName.push(snapshot.val()[index].Title);
+            cardValues.push(snapshot.val()[index].Value);            
+        }
+    });
+}
+
+
+function dealCardsP2() {
+
+        // Remove Join Game Modal, Start Game, and Show Stats
+        $("#modal-row").remove();
+        $("#roundRem").html("Round: " + numRound + " / 5");
+        $("#pWins").html(P1Score);
+        $("#oWins").html(P2Score);
+        $("#numLeft, #oWins, #pWins").css("visibility", "visible");
+
+    for (var i = 1; i <= 5; i++) {
+
+        var cardIMG = $("<img>").attr("src", moviePosterURLs[i + 5]);
+        var cardValue1 = $("<h3>").text(cardValues[i + 5]).addClass("top-right");
+        var cardValue2 = $("<h3>").text(cardValues[i + 5]).addClass("bottom-left");
+
+        $("#card-bodyP" + i).attr("data-index", (i + 5)).addClass("gameCard");
+        $("#card-bodyP" + i).html(cardIMG).append(cardValue1).append(cardValue2);
+
+        $("#oCard" + i).css("display", "block");
+        $("#pCard" + i).css("display", "block");
+    }
 }
 
 function nextRound() {
 
     numRound++;
-    firebase.ref("/round/" + numRound);
+    firebase.ref("/Round/" + numRound);
 
+    // Deal Cards for Round
     for (var i = 1; i <= (5 * numRound); i++) {
 
     }
-}
-
-function joinGame() {
-
-    
 }
 
 // ***************************************
@@ -221,46 +279,46 @@ $(document).ready(function() {
     });      
 });
    
-    $(document).ready(function() {
+$(document).ready(function() {
        
-        var cardplayed4 = $("#pCard3");
-        var cardplayed5 = $("#oCard3");
+    var cardplayed4 = $("#pCard3");
+    var cardplayed5 = $("#oCard3");
     
-        $("#pCard3").on("click", function() {
-            if ($(".clicked") !== false) {
-                $(".clicked").css( "zIndex", -10 );
-                $(".clicked").animate({ top: "0px", left:"0px"  }, "normal");
-            }
-          cardplayed4.animate({ top: "-=250px", left:"-=260px"  }, "normal");
-          $("#oCard31").removeClass("card-body1");
-          $("#oCard3").addClass("card-body");    
-          cardplayed5.animate({ bottom: "-=213px", right:"-=260px"  }, "normal");
-          $("#pCard3").addClass("clicked", true);
-          $("#oCard3").addClass("clicked", true);
-        }); 
-    });
+    $("#pCard3").on("click", function() {
+        if ($(".clicked") !== false) {
+            $(".clicked").css( "zIndex", -10 );
+            $(".clicked").animate({ top: "0px", left:"0px"  }, "normal");
+        }
+        cardplayed4.animate({ top: "-=250px", left:"-=260px"  }, "normal");
+        $("#oCard31").removeClass("card-body1");
+        $("#oCard3").addClass("card-body");    
+        cardplayed5.animate({ bottom: "-=213px", right:"-=260px"  }, "normal");
+        $("#pCard3").addClass("clicked", true);
+        $("#oCard3").addClass("clicked", true);
+    }); 
+});
     
-    $(document).ready(function() {
+$(document).ready(function() {
 
-        var cardplayed6 = $("#pCard4");
-        var cardplayed7 = $("#oCard2");
+    var cardplayed6 = $("#pCard4");
+    var cardplayed7 = $("#oCard2");
     
-        $("#pCard4").on("click", function() {
-            if ($(".clicked") !== false) {
-                $(".clicked").css( "zIndex", -10 );
-                $(".clicked").animate({ top: "0px", left:"0px"  }, "normal");
-            }
-          cardplayed6.animate({ top: "-=250px", left:"-=447px"  }, "normal");
-          $("#oCard21").removeClass("card-body1");
-          $("#oCard2").addClass("card-body");    
-          cardplayed7.animate({ bottom: "-=213px", right:"-=447px"  }, "normal");
-          $("#pCard4").addClass("clicked", true);
-          $("#oCard2").addClass("clicked", true);
-        }); 
-    });
+    $("#pCard4").on("click", function() {
+        if ($(".clicked") !== false) {
+            $(".clicked").css( "zIndex", -10 );
+            $(".clicked").animate({ top: "0px", left:"0px"  }, "normal");
+        }
+        cardplayed6.animate({ top: "-=250px", left:"-=447px"  }, "normal");
+        $("#oCard21").removeClass("card-body1");
+        $("#oCard2").addClass("card-body");    
+        cardplayed7.animate({ bottom: "-=213px", right:"-=447px"  }, "normal");
+        $("#pCard4").addClass("clicked", true);
+        $("#oCard2").addClass("clicked", true);
+    }); 
+});
     
 
-    $(document).ready(function() {
+$(document).ready(function() {
     var cardplayed8 = $("#pCard5");
     var cardplayed9 = $("#oCard1");
 
@@ -269,12 +327,12 @@ $(document).ready(function() {
             $(".clicked").css( "zIndex", -10 );
             $(".clicked").animate({ top: "0px", left:"0px"  }, "normal");
         }
-      cardplayed8.animate({ top: "-=250px", left:"-=636px"  }, "normal");
-      $("#oCard11").removeClass("card-body1");
-      $("#oCard1").addClass("card-body");    
-      cardplayed9.animate({ bottom: "-=213px", right:"-=636px"  }, "normal");
-      $("#pCard5").addClass("clicked", true);
-      $("#oCard1").addClass("clicked", true);
+    cardplayed8.animate({ top: "-=250px", left:"-=636px"  }, "normal");
+    $("#oCard11").removeClass("card-body1");
+    $("#oCard1").addClass("card-body");    
+    cardplayed9.animate({ bottom: "-=213px", right:"-=636px"  }, "normal");
+    $("#pCard5").addClass("clicked", true);
+    $("#oCard1").addClass("clicked", true);
     });
 });
 
@@ -282,51 +340,76 @@ $(document).ready(function() {
 
 // GAME / PAGE LOGIC
 
-// Populate Card Deck
-pullCards();
-
 // Listeners for Usernames
-$("#join").click(function() {
+$(document).on("click", "#join", function() {
 
     if ($("#username").val() !== "") {
 
         username = capitalize($("#username").val());
+        console.log(username);
         joinGame();
     }
 });
 
 // 'Enter' for Username Input
-$("#username").keypress(function(event) {
+$(document).on("keypress", "#username", function(event) {
 
     if (event.which === 13 && $("#username").val() !== "") {
 
         username = capitalize($("#username").val());
+        console.log(username);
         joinGame();
     }
 });
 
 // Capitalize Usernames
 function capitalize(name) {
-
     return name.charAt(0).toUpperCase() + name.slice(1);
 }
 
-// Chatbox Input Listener
-// $("#chat-input").keypress(function(event) {
-    
-//     if (event.which === 13 && $("#chat-input").val() !== "") {
+// Track Changes in DB Key Which Contains Player Objects
+playersRef.on("value", function(snapshot) {
+    // Length of the 'Players' Array
+    currentPlayers = snapshot.numChildren();
 
-//         var message = $("#chat-input").val();
-  
-//         chatData.push({
-//         Name: username,
-//         Message: message,
-//         Time: firebase.database.ServerValue.TIMESTAMP,
-//         idNum: playerNum
-//     });
-  
-//       $("#chat-input").val("");
-//     }
+    // Check for Existing Players
+    playerOneExists = snapshot.child("1").exists();
+    playerTwoExists = snapshot.child("2").exists();
+
+    // Player Objects
+    playerOneData = snapshot.child("1").val();
+    playerTwoData = snapshot.child("2").val();
+
+    // If player 1 Exists, Populate Name and Score
+    if (playerOneExists) {
+        $("#pName").text(playerOneData.Name);
+        $("#pScore").text("+ " + playerOneData.Score);
+    }
+    else {
+    // If No Player 1, Clear Win/Loss Data and Show Waiting
+        $("#pName").text("Waiting for Player 1");
+        $("#pScore").empty();
+    }
+
+    // If player 2 Exists, Populate Name and Score and Start Game
+    if (playerTwoExists) {
+        $("#oName").text(playerTwoData.Name);
+        $("#oScore").text("+ " + playerTwoData.Score);
+
+        // dealCardsP1();
+    }    
+    else {
+    // If No Player 2, Clear Win/Loss Data and Show Waiting
+        $("#oName").text("Waiting for Player 2");
+        $("#oScore").empty();
+    }
+});
+
+// roundsRef.on("value", function(snapshot) {
+
+//         console.log(snapshot.val());
+        
+        
 // });
 
 // Click Event for Cards Dealt
@@ -340,6 +423,8 @@ $(document).on("click", ".gameCard", function() {
   
     // Sets the Choice in the Current Player Object in Firebase
     playerRef.child("Choice").set(clickChoice);
+
+
   
     // Increment Turn -- Turn Values:
     // 1 - P1
@@ -348,53 +433,6 @@ $(document).on("click", ".gameCard", function() {
     currentTurnRef.transaction(function(turn) {
       return turn + 1;
     });
-});
-
-// Update Chat on Modal @ New Message Detected - Ordered by 'Time' Value
-// chatData.orderByChild("time").on("child_added", function(snapshot) {
-//     $("#chat-messages").append(
-//       $("<p>").addClass("player-" + snapshot.val().idNum),
-//       $("<span>").text(snapshot.val().name + ":" + snapshot.val().message)
-//     );
-  
-//     // Keeps div Scrolled to Bottom
-//     $("#chat-messages").scrollTop($("#chat-messages")[0].scrollHeight);
-// });
-
-// Track Changes in DB Key Which Contains Player Objects
-playersRef.on("value", function(snapshot) {
-    // Length of the 'Players' Array
-    currentPlayers = snapshot.numChildren();
-  
-    // Check for Existing Players
-    playerOneExists = snapshot.child("1").exists();
-    playerTwoExists = snapshot.child("2").exists();
-  
-    // Player Objects
-    playerOneData = snapshot.child("1").val();
-    playerTwoData = snapshot.child("2").val();
-  
-    // If player 1 Exists, Populate Name and Wins/Losses
-    if (playerOneExists) {
-        $("#pName").text(playerOneData.name);
-        $("#pScore").text("+" + playerOneData.score);
-    }
-    else {
-    // If No Player 1, Clear Win/Loss Data and Show Waiting
-        $("#pName").text("Waiting for Player 1");
-        $("#pScore").empty();
-    }
-  
-    // If player 2 Exists, Populate Name and Wins/Losses
-    if (playerTwoExists) {
-        $("#oName").text(playerTwoData.name);
-        $("#oScore").text("+" + playerTwoData.score);
-    }    
-    else {
-    // If No Player 1,Clear Win/Loss Data and Show Waiting
-        $("#oName").text("Waiting for Player 2");
-        $("#oScore").empty();
-    }
 });
 
 // Detect Changes in Current Turn DB Key
@@ -409,10 +447,12 @@ currentTurnRef.on("value", function(snapshot) {
             // If Current Player's Turn, Update Text
             if (currentTurn === playerNum) {
                 $("#current-turn h2").text("It's Your Turn!");
+
+                dealCardsP1();
             }
             else {
                 // If Not Current Player's Turn, Update Text to Say Waiting
-                $("#current-turn h2").text("Waiting for " + playerOneData.name + " to play.");
+                $("#current-turn h2").text("Waiting for " + playerOneData.Name + " to play.");
             }
   
             // Highlight Active Player [[UPDATE STYLE if desired]]
@@ -423,11 +463,14 @@ currentTurnRef.on("value", function(snapshot) {
             // If Current Player's Turn, Update Text
             if (currentTurn === playerNum) {
                 $("#current-turn").text("It's Your Turn!");
+
+                getMovieCount();
             }
             else {
                 // If Not Current Player's Turn, Update Text to Say Waiting
-                $("#current-turn").text("Waiting for " + playerTwoData.name + " to play.");
+                $("#current-turn").text("Waiting for " + playerTwoData.Name + " to play.");
             }
+            
             // Highlight Active Player [[UPDATE STYLE if desired]]
             $("#opponent").css("filter", "invert(100%)");
             $("#player").css("filter", "invert(0%)");
@@ -459,11 +502,11 @@ currentTurnRef.on("value", function(snapshot) {
     }
 });
   
-// When Player Joins Game, Check for 2 Players. If Yes, Game Will Start
+// When Player Joins Game, Check for 2 Players. If Yes, "Start" Button Will Appear
 playersRef.on("child_added", function(snapshot) {
 
     if (currentPlayers === 1) {
-        // Set turn to 1 and Start the Game
+        // Set turn to 1
         currentTurnRef.set(1);
     }
 });
@@ -477,18 +520,47 @@ function joinGame() {
     if (currentPlayers < 2) {
         if (playerOneExists) {
             playerNum = 2;
+
+            // Remove Name Entry Box and Update with Waiting for P1 to Play
+            $("#joinGame").empty();
+            $("#username").hide();
+            $("#join").hide();
+
+            $("#joinGame").append($("<p>").text("Hi " + username + "! You are Player " + playerNum));
+            $("#joinGame").append($("<h4>").text("Waiting for " + playerOneData.Name + " to Play..."));
+            $("#joinGame").append($("<img>").attr("src", "assets/images/loading.gif"));
         }
         else {
             playerNum = 1;
+
+            // Remove Name Entry Box and Update with Waiting for P2
+            $("#joinGame").empty();
+            $("#username").hide();
+            $("#join").hide();
+            
+            $("#joinGame").append($("<p>").text("Hi " + username + "! You are Player " + playerNum));
+            $("#joinGame").append($("<h4>").text("Waiting for Player 2 to Join Game..."));
+            $("#joinGame").append($("<img>").attr("src", "assets/images/loading.gif"));
+                
+            // Populate Card Deck if First Player
+            pullCards();
         }
   
         // Create DB Key Based on Assigned Player Number
-        playerRef = firebase.ref("/players/" + playerNum);
+        playerRef = firebase.ref("/Players/" + playerNum);
   
         // Create Player Object
         playerRef.set({
         Name: username,
         Score: 0
+        });
+
+        // Create DB Key Based on Current Round
+        roundRef = firebase.ref("/Round/" + numRound);
+        roundRef.set({
+            P1Score: P1Score,
+            P2Score: P2Score,
+            RoundsRem: roundsLeft
         });
   
         // On Disconnect, Erase Player Object
@@ -496,6 +568,12 @@ function joinGame() {
 
         // If Disconnect, Set Turn to Null
         currentTurnRef.onDisconnect().remove();
+
+        // If Disconnect, Clear Card Deck
+        cardDeckRef.onDisconnect().remove();
+
+        // If Disconnect, Clear Round
+        roundRef.onDisconnect().remove();
   
         // Update Chatbox with Disconnect Message
         // chatDataDisc.onDisconnect().set({
@@ -504,11 +582,6 @@ function joinGame() {
         //     Message: "has disconnected.",
         //     idNum: 0
         // });
-  
-        // Remove Name Entry Box and Update with Current Player Name
-        $("#joinGame").empty();
-  
-        $("#joinGame").append($("<h2>").text("Hi " + username + "! You are Player " + playerNum));
     }
     else {
         // If Current Players is P2, New Player Can't Join
@@ -521,13 +594,13 @@ function gameLogic(player1choice, player2choice) {
 
     var playerOneWon = function() {
 
-        $("#result h2").text(playerOneData.name + " Wins the Round!");
+        $("#result h2").text(playerOneData.Name + " Wins the Round!");
 
         if (playerNum === 1) {
             playersRef
             .child("1")
             .child("Score")
-            .set(playerOneData.score + 1);
+            .set(playerOneData.Score + 1);
 
             // playersRef
             // .child("2")
@@ -538,13 +611,13 @@ function gameLogic(player1choice, player2choice) {
 
     var playerTwoWon = function() {
 
-        $("#result h2").text(playerTwoData.name + " Wins the Round!");
+        $("#result h2").text(playerTwoData.Name + " Wins the Round!");
 
         if (playerNum === 2) {
             playersRef
             .child("2")
             .child("wins")
-            .set(playerTwoData.score + 1);
+            .set(playerTwoData.Score + 1);
 
             // playersRef
             // .child("1")
@@ -601,20 +674,20 @@ function gameLogic(player1choice, player2choice) {
 
 
 // Deal Cards for Round
-$(document).on("click", "#gameStart", function() {
+// $(document).on("click", "#gameStart", function() {
     
-    dealCards();
+//     dealCards();
 
-    // Create DB Key Based on Assigned Player Number
-    playerRef = firebase.ref("/players/" + playerNum);
+//     // Create DB Key Based on Assigned Player Number
+//     playerRef = firebase.ref("/Players/" + playerNum);
 
-    // Create Player Object
-    playerRef.set({
-    Name: username,
-    Score: 0
-    });
+//     // Create Player Object
+//     playerRef.set({
+//     Name: username,
+//     Score: 0
+//     });
 
-});
+// });
 
 // CREATE onClick function to set TrailerID attribute to corresponding card in Firebase when movie is selected.
 
@@ -662,4 +735,33 @@ $(document).on("click", "#gameStart", function() {
 //             modal.css("display", "none");
 //         }
 //     });
+// });
+
+// Chatbox Input Listener
+// $("#chat-input").keypress(function(event) {
+    
+//     if (event.which === 13 && $("#chat-input").val() !== "") {
+
+//         var message = $("#chat-input").val();
+  
+//         chatData.push({
+//         Name: username,
+//         Message: message,
+//         Time: firebase.database.ServerValue.TIMESTAMP,
+//         idNum: playerNum
+//     });
+  
+//       $("#chat-input").val("");
+//     }
+// });
+
+// Update Chat on Modal @ New Message Detected - Ordered by 'Time' Value
+// chatData.orderByChild("time").on("child_added", function(snapshot) {
+//     $("#chat-messages").append(
+//       $("<p>").addClass("player-" + snapshot.val().idNum),
+//       $("<span>").text(snapshot.val().name + ":" + snapshot.val().message)
+//     );
+  
+//     // Keeps div Scrolled to Bottom
+//     $("#chat-messages").scrollTop($("#chat-messages")[0].scrollHeight);
 // });

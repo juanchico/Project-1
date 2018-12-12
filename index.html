@@ -37,13 +37,13 @@
                                 <div id="gameScore" class="col-md-12">
                                         <div class="row">
                                                 <div id="playerInfo" class="col-md-12">
-                                                        <div id="player" class="alert alert-secondary" role="alert"><span id="pName">Player Name</span> <span id="pScore" class="float-right">Number</span></div>
+                                                        <div id="player" class="alert alert-secondary" role="alert"><span id="pName"></span><span id="pScore" class="float-right"></span></div>
                                                 </div> 
                                         </div> 
 
                                         <div class="row">
                                                 <div id="oppInfo" class="col-md-12">
-                                                        <div id="opponent" class="alert alert-secondary" role="alert" >Opponent Name <span id="oScore" class="float-right">Number</span> </div>
+                                                        <div id="opponent" class="alert alert-secondary" role="alert"><span id="oName"></span><span id="oScore" class="float-right"></span></div>
                                                 </div>
                                         </div>
                                 </div>
@@ -53,7 +53,7 @@
                                 <div id="countBox" class="col-md-12">
                                         <div class="row" id="rounds">
                                                 <div id="numRounds" class="col-md-12" >
-                                                        <div id="numLeft" class="alert alert-secondary" role="alert" >#numLeft</div>
+                                                        <div id="numLeft" class="alert alert-secondary" role="alert"><span id="roundRem"></span></div>
                                                 </div> 
                                         </div> 
 
@@ -71,12 +71,13 @@
                                 </div>
                         </div>
 
-                        <div class="row" id="sbr3">
+                        <!-- <div class="row" id="sbr3">
                                 <div id="startPreview" class="col-md-12">
                                         <div class="row">
                                                 <div id="startGame" class="col-md-12">
                                                         <div id="start">
-                                                        <!-- 
+
+                                                        ------
                                                         The YouTube movie trailer modal (#previewModal) appears when a player selects a movie in their deck and is contained within a container <div> name #preview
                                                         $('#previewModal').on('show.pCard.modal', function (e) {
                                                         if (!data) return e.preventDefault() // stops modal from being shown
@@ -86,12 +87,13 @@
                                                         Documentation [1]: (#youWin = Player's Win Count on Round) OR (#youLose = "")
                                                         Documentation [2]: Above code is an example of JS/jQuery of modal behavior as a placeholder.
                                                         Documentation [3]: Code may or may not be a Modal. TBD.
-                                                        -->
+                                                        ------
+
                                                         <button id="gameStart" type="button" class="btn btn-primary btn-lg">START</button></div>
                                                 </div> 
                                         </div>                              
                                 </div>
-                        </div>
+                        </div> -->
                 </div>      
 
                 <div id="bg" class="col-md-9">
@@ -157,14 +159,15 @@
                         <!-- Game Table Play Area -->
                         <div class=row id="play">
 
-                                        <div class="row">
-                                                        <div id="modal" class="col-md-12">
-                                                                <div class="modal-content">
-                                                                        <span class="close">&times;</span>
-                                                                        <input></input>
-                                                                </div>
-                                                        </div>
+                                <div id="modal-row" class="row">
+                                        <div id="modal" class="col-md-12">
+                                                <div class="modal-content">
+                                                        <span id="joinGame">Welcome to Movie War!</span>
+                                                        <input type="text" id="username" placeholder="Enter Your Name"></input>
+                                                        <button id="join">Join Game</button>
                                                 </div>
+                                        </div>
+                                </div>
                         </div>
                         <div  id="playArea" class="col-md-12">                
 
