@@ -301,3 +301,17 @@ body {
     margin-left: 35%;
     margin-top: 2%;
 }
+
+#youtube {
+    background-image: url(../images/img-10.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 290px;
+    position: absolute;
+    bottom: 0;
+}
+
+#trailerVideo {
+    width: 90%;
+    height: 90%;
+}
