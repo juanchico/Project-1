@@ -1,7 +1,3 @@
-/* * {
-    width: 100%;
-} */
-
 body {
     background-color: black;
     font-family: 'Indie Flower', cursive;
@@ -142,10 +138,6 @@ body {
     border-radius: 5px;
 }
 
-/* #card-bodyP1 img:hover, #card-bodyP2 img:hover, #card-bodyP3 img:hover, #card-bodyP4 img:hover, #card-bodyP5 img:hover {
-
-} */
-
 .card-body1 {
     display: flex;
     flex-wrap: nowrap;
@@ -224,4 +216,38 @@ body {
     background-image: url("../images/img-9.png");
     background-size: 100%;
     background-repeat: no-repeat;
+}
+
+#modal {
+    /* display: none; */
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 296px 183px;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover, .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }

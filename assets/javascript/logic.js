@@ -172,20 +172,26 @@ function nextRound() {
     }
 }
 
+function joinGame() {
+
+    
+}
+
 // ***************************************
 
 // CARD CLICK FUNCTIONS
 $(document).ready(function() {
    
-    
     var cardplayed = $("#pCard1");
     var cardplayed1 = $("#oCard5");
 
     $("#pCard1").on("click", function() {
+
         if ($(".clicked") !== false) {
             $(".clicked").css( "zIndex", -10 );
             $(".clicked").animate({ top: "0px", left:"0px"  }, "normal");
         }
+
       cardplayed.animate({ top: "-=250px", left:"120px"  }, "normal");
       $("#oCard51").removeClass("card-body1");
       $("#oCard5").addClass("card-body");    
@@ -195,6 +201,7 @@ $(document).ready(function() {
       
     });
 });
+
 $(document).ready(function() {
     
     var cardplayed2 = $("#pCard2");
@@ -279,7 +286,7 @@ $(document).ready(function() {
 pullCards();
 
 // Listeners for Usernames
-$("#start").click(function() {
+$("#join").click(function() {
 
     if ($("#username").val() !== "") {
 
@@ -305,26 +312,26 @@ function capitalize(name) {
 }
 
 // Chatbox Input Listener
-$("#chat-input").keypress(function(event) {
+// $("#chat-input").keypress(function(event) {
     
-    if (event.which === 13 && $("#chat-input").val() !== "") {
+//     if (event.which === 13 && $("#chat-input").val() !== "") {
 
-        var message = $("#chat-input").val();
+//         var message = $("#chat-input").val();
   
-        chatData.push({
-        Name: username,
-        Message: message,
-        Time: firebase.database.ServerValue.TIMESTAMP,
-        idNum: playerNum
-    });
+//         chatData.push({
+//         Name: username,
+//         Message: message,
+//         Time: firebase.database.ServerValue.TIMESTAMP,
+//         idNum: playerNum
+//     });
   
-      $("#chat-input").val("");
-    }
-});
+//       $("#chat-input").val("");
+//     }
+// });
 
 // Click Event for Cards Dealt
 $(document).on("click", ".gameCard", function() {
-    console.log("click");
+    console.log(this);
   
     // Grabs "data-index" From Card Choice
     var clickChoice = $(this).attr("data-index");
@@ -332,9 +339,7 @@ $(document).on("click", ".gameCard", function() {
     console.log(clickChoice);
   
     // Sets the Choice in the Current Player Object in Firebase
-    // playerRef.child("choice").set(clickChoice);
-  
-    // User Choice Animates to the Game Board [[HERE]]
+    playerRef.child("Choice").set(clickChoice);
   
     // Increment Turn -- Turn Values:
     // 1 - P1
@@ -346,15 +351,15 @@ $(document).on("click", ".gameCard", function() {
 });
 
 // Update Chat on Modal @ New Message Detected - Ordered by 'Time' Value
-chatData.orderByChild("time").on("child_added", function(snapshot) {
-    $("#chat-messages").append(
-      $("<p>").addClass("player-" + snapshot.val().idNum),
-      $("<span>").text(snapshot.val().name + ":" + snapshot.val().message)
-    );
+// chatData.orderByChild("time").on("child_added", function(snapshot) {
+//     $("#chat-messages").append(
+//       $("<p>").addClass("player-" + snapshot.val().idNum),
+//       $("<span>").text(snapshot.val().name + ":" + snapshot.val().message)
+//     );
   
-    // Keeps div Scrolled to Bottom
-    $("#chat-messages").scrollTop($("#chat-messages")[0].scrollHeight);
-});
+//     // Keeps div Scrolled to Bottom
+//     $("#chat-messages").scrollTop($("#chat-messages")[0].scrollHeight);
+// });
 
 // Track Changes in DB Key Which Contains Player Objects
 playersRef.on("value", function(snapshot) {
@@ -371,28 +376,24 @@ playersRef.on("value", function(snapshot) {
   
     // If player 1 Exists, Populate Name and Wins/Losses
     if (playerOneExists) {
-        $("#player1-name").text(playerOneData.name);
-        $("#player1-wins").text("Wins: " + playerOneData.wins);
-        $("#player1-losses").text("Losses: " + playerOneData.losses);
+        $("#pName").text(playerOneData.name);
+        $("#pScore").text("+" + playerOneData.score);
     }
     else {
-    // If No Player 1,Clear Win/Loss Data and Show Waiting
-        $("#player1-name").text("Waiting for Player 1");
-        $("#player1-wins").empty();
-        $("#player1-losses").empty();
+    // If No Player 1, Clear Win/Loss Data and Show Waiting
+        $("#pName").text("Waiting for Player 1");
+        $("#pScore").empty();
     }
   
     // If player 2 Exists, Populate Name and Wins/Losses
     if (playerTwoExists) {
-        $("#player2-name").text(playerTwoData.name);
-        $("#player2-wins").text("Wins: " + playerTwoData.wins);
-        $("#player2-losses").text("Losses: " + playerTwoData.losses);
+        $("#oName").text(playerTwoData.name);
+        $("#oScore").text("+" + playerTwoData.score);
     }    
     else {
     // If No Player 1,Clear Win/Loss Data and Show Waiting
-        $("#player2-name").text("Waiting for Player 2");
-        $("#player2-wins").empty();
-        $("#player2-losses").empty();
+        $("#oName").text("Waiting for Player 2");
+        $("#oScore").empty();
     }
 });
 
@@ -408,43 +409,37 @@ currentTurnRef.on("value", function(snapshot) {
             // If Current Player's Turn, Update Text
             if (currentTurn === playerNum) {
                 $("#current-turn h2").text("It's Your Turn!");
-                $("#player" + playerNum + " ul").append("<li>Rock</li><li>Paper</li><li>Scissors</li>");
             }
             else {
                 // If Not Current Player's Turn, Update Text to Say Waiting
-                $("#current-turn h2").text("Waiting for " + playerOneData.name + " to choose.");
+                $("#current-turn h2").text("Waiting for " + playerOneData.name + " to play.");
             }
   
             // Highlight Active Player [[UPDATE STYLE if desired]]
-            $("#player1").css("border", "2px solid yellow");
-            $("#player2").css("border", "1px solid black");
+            $("#player").css("filter", "invert(100%)");
+            $("#opponent").css("filter", "invert(0%)");
         }
         else if (currentTurn === 2) {
             // If Current Player's Turn, Update Text
             if (currentTurn === playerNum) {
                 $("#current-turn").text("It's Your Turn!");
-                $("#player" + playerNum + " ul").append("<li>Rock</li><li>Paper</li><li>Scissors</li>");
             }
             else {
                 // If Not Current Player's Turn, Update Text to Say Waiting
-                $("#current-turn").text("Waiting for " + playerTwoData.name + " to choose.");
+                $("#current-turn").text("Waiting for " + playerTwoData.name + " to play.");
             }
             // Highlight Active Player [[UPDATE STYLE if desired]]
-            $("#player2").css("border", "2px solid yellow");
-            $("#player1").css("border", "1px solid black");
+            $("#opponent").css("filter", "invert(100%)");
+            $("#player").css("filter", "invert(0%)");
         }
         else if (currentTurn === 3) {
             // Check for Win/Lose Game Logic and Reset Turn
-            gameLogic(playerOneData.choice, playerTwoData.choice);
+            gameLogic(playerOneData.Choice, playerTwoData.Choice);
   
-            // Reveal Player/Opp Choices [[PLAY TRAILER IN MODAL HERE]]
-            $("#player1-chosen").text(playerOneData.choice);
-            $("#player2-chosen").text(playerTwoData.choice);
+            // Reveal Player/Opp Choices [[PLAY TRAILER IN MODAL HERE?]]
     
             //  Reset After Timeout
             var moveOn = function() {
-            $("#player1-chosen").empty();
-            $("#player2-chosen").empty();
             $("#result").empty();
   
             // Check to Ensure Players Have Not Left Before Timeout
@@ -453,15 +448,13 @@ currentTurnRef.on("value", function(snapshot) {
             }
         };
   
-        //  show results for 2 seconds, then resets
-        setTimeout(moveOn, 2000);
+        //  Show Card Play Results for 3 Seconds
+        setTimeout(moveOn, 1000 * 3);
     }
     else {
-        $("#player1 ul").empty();
-        $("#player2 ul").empty();
         $("#current-turn").html("<h2>Waiting for another player to join.</h2>");
-        $("#player2").css("border", "1px solid black");
-        $("#player1").css("border", "1px solid black");
+        $(".oCards").css("display", "none");
+        $(".pCards").css("display", "none");
     }
     }
 });
@@ -478,7 +471,7 @@ playersRef.on("child_added", function(snapshot) {
 // joinGame Function
 function joinGame() {
  
-    var chatDataDisc = database.ref("/chat/" + Date.now());
+    // var chatDataDisc = database.ref("/chat/" + Date.now());
   
     // If P1 Exists, Joining Player is P2 -- Else, P1 is P1
     if (currentPlayers < 2) {
@@ -490,13 +483,12 @@ function joinGame() {
         }
   
         // Create DB Key Based on Assigned Player Number
-        playerRef = database.ref("/players/" + playerNum);
+        playerRef = firebase.ref("/players/" + playerNum);
   
         // Create Player Object
         playerRef.set({
         Name: username,
-        Wins: 0,
-        Losses: 0
+        Score: 0
         });
   
         // On Disconnect, Erase Player Object
@@ -506,17 +498,17 @@ function joinGame() {
         currentTurnRef.onDisconnect().remove();
   
         // Update Chatbox with Disconnect Message
-        chatDataDisc.onDisconnect().set({
-            Name: username,
-            Time: firebase.database.ServerValue.TIMESTAMP,
-            Message: "has disconnected.",
-            idNum: 0
-        });
+        // chatDataDisc.onDisconnect().set({
+        //     Name: username,
+        //     Time: firebase.database.ServerValue.TIMESTAMP,
+        //     Message: "has disconnected.",
+        //     idNum: 0
+        // });
   
         // Remove Name Entry Box and Update with Current Player Name
-        $("#swap-zone").empty();
+        $("#joinGame").empty();
   
-        $("#swap-zone").append($("<h2>").text("Hi " + username + "! You are Player " + playerNum));
+        $("#joinGame").append($("<h2>").text("Hi " + username + "! You are Player " + playerNum));
     }
     else {
         // If Current Players is P2, New Player Can't Join
@@ -529,40 +521,40 @@ function gameLogic(player1choice, player2choice) {
 
     var playerOneWon = function() {
 
-        $("#result h2").text(playerOneData.name + " Wins!");
+        $("#result h2").text(playerOneData.name + " Wins the Round!");
 
         if (playerNum === 1) {
             playersRef
             .child("1")
-            .child("wins")
-            .set(playerOneData.wins + 1);
+            .child("Score")
+            .set(playerOneData.score + 1);
 
-            playersRef
-            .child("2")
-            .child("losses")
-            .set(playerTwoData.losses + 1);
+            // playersRef
+            // .child("2")
+            // .child("losses")
+            // .set(playerTwoData.losses + 1);
         }
     };
 
     var playerTwoWon = function() {
 
-        $("#result h2").text(playerTwoData.name + " Wins!");
+        $("#result h2").text(playerTwoData.name + " Wins the Round!");
 
         if (playerNum === 2) {
             playersRef
             .child("2")
             .child("wins")
-            .set(playerTwoData.wins + 1);
+            .set(playerTwoData.score + 1);
 
-            playersRef
-            .child("1")
-            .child("losses")
-            .set(playerOneData.losses + 1);
+            // playersRef
+            // .child("1")
+            // .child("losses")
+            // .set(playerOneData.losses + 1);
         }
     };
 
-// WHAT DO WE DO FOR A TIE?!?!?
-    var tie = function() {
+// Game Conditional Logic -- What happens at tie?
+    var gameLogic = function() {
 
         $("#result h2").text("Tie Game!");
     };
@@ -612,6 +604,15 @@ function gameLogic(player1choice, player2choice) {
 $(document).on("click", "#gameStart", function() {
     
     dealCards();
+
+    // Create DB Key Based on Assigned Player Number
+    playerRef = firebase.ref("/players/" + playerNum);
+
+    // Create Player Object
+    playerRef.set({
+    Name: username,
+    Score: 0
+    });
 
 });
 

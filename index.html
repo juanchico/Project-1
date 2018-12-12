@@ -37,7 +37,7 @@
                                 <div id="gameScore" class="col-md-12">
                                         <div class="row">
                                                 <div id="playerInfo" class="col-md-12">
-                                                        <div id="player" class="alert alert-secondary" role="alert">Player Name <span id="pScore" class="float-right">Number</span></div>
+                                                        <div id="player" class="alert alert-secondary" role="alert"><span id="pName">Player Name</span> <span id="pScore" class="float-right">Number</span></div>
                                                 </div> 
                                         </div> 
 
@@ -95,6 +95,7 @@
                 </div>      
 
                 <div id="bg" class="col-md-9">
+
                         <div class=row id="deck">
 
                                 <!-- Opp Hand -->
@@ -154,9 +155,18 @@
                         <br>
 
                         <!-- Game Table Play Area -->
-                        <div class=row id="play"></div>
-                        <div  id="playArea" class="col-md-12"></div>
-                
+                        <div class=row id="play">
+
+                                        <div class="row">
+                                                        <div id="modal" class="col-md-12">
+                                                                <div class="modal-content">
+                                                                        <span class="close">&times;</span>
+                                                                        <input></input>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                        </div>
+                        <div  id="playArea" class="col-md-12">                
 
                         <div class=row id="deck1">
 
@@ -167,7 +177,7 @@
 
                                                         <!-- Player Card 1 -->
                                                         <div class="pCards" class="col-md-2.2">
-                                                                <div class="card" id="pCard1">
+                                                                <div class="card" id="pCard1" data-type="playerCard">
                                                                         <div id="card-bodyP1">
                                                                                 <h5 class="card-title" id="cardMovie1">.pCard</h5>
                                                                         </div>
@@ -176,7 +186,7 @@
 
                                                         <!-- Player Card 2 -->
                                                         <div class="pCard" class="col-md-2.2">
-                                                                <div class="card" id="pCard2">
+                                                                <div class="card" id="pCard2" data-type="playerCard">
                                                                         <div id="card-bodyP2">
                                                                                 <h5 class="card-title" id="cardMovie2">.pCard</h5>
                                                                         </div>
@@ -185,7 +195,7 @@
 
                                                         <!-- Player Card 3 -->
                                                         <div class="pCard" class="col-md-2.2">
-                                                                <div class="card" id="pCard3">
+                                                                <div class="card" id="pCard3" data-type="playerCard">
                                                                         <div id="card-bodyP3">
                                                                                 <h5 class="card-title" id="cardMovie3">.pCard</h5>
                                                                         </div>
@@ -194,7 +204,7 @@
 
                                                         <!-- Player Card 4 -->
                                                         <div class="pCard" class="col-md-2.2">
-                                                                <div class="card" id="pCard4">
+                                                                <div class="card" id="pCard4" data-type="playerCard">
                                                                         <div id="card-bodyP4">
                                                                                 <h5 class="card-title" id="cardMovie4">.pCard</h5>
                                                                         </div>
@@ -203,7 +213,7 @@
 
                                                         <!-- Player Card 5 -->
                                                         <div class="pCard" class="col-md-2.2">
-                                                                <div class="card" id="pCard5">
+                                                                <div class="card" id="pCard5" data-type="playerCard">
                                                                         <div id="card-bodyP5">
                                                                                 <h5 class="card-title" id="cardMovie5">.pCard</h5>
                                                                         </div>
