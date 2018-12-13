@@ -15,11 +15,10 @@ firebase.initializeApp(config);
 // GLOBAL VARIABLES
 
 // IMDB IDs
-var imdbIDs = ["tt0170016", "tt0314331", "tt0241527", "tt0319343", "tt0309987", "tt0338348", "tt0468569", "tt0120737", "tt1099212", "tt0367594", "tt0330373", "tt0377092", "tt0479143", "tt0304669", "tt0361748", "tt0477348", "tt0304141", "tt0167260", "tt1067106", "tt0317705", "tt0388419", "tt0454945", "tt0172495", "tt0409459", "tt0206634", "tt0482571", "tt0218967", "tt0307987", "tt0167261", "tt0486583", "tt0338013", "tt0416449", "tt0217869", "tt0401792", "tt0268978", "tt0110357", "tt0099785", "tt0111070", "tt0111161", "tt0110912", "tt0120338", "tt0108052", "tt0109830", "tt0104431", "tt0112573", "tt0099685", "tt0107290", "tt0133093", "tt0102926", "tt0118715", "tt0107688", "tt0137523", "tt0119217", "tt0118749", "tt0116282", "tt0114369", "tt0120815", "tt0117737", "tt0103874", "tt0102798", "tt0113277", "tt0119116", "tt0119303", "tt0114709", "tt0103064", "tt0117509", "tt0103639", "tt0097958", "tt0085334", "tt0089927", "tt0095560", "tt0093389", "tt0095016", "tt0093779", "tt0093058", "tt0088763", "tt0083658", "tt0093773", "tt0086250", "tt1213644", "tt0270846", "tt0060666", "tt0804492", "tt1316037", "tt0317676", "tt0417056", "tt0339034", "tt0362165", "tt0369226", "tt0185183", "tt0096870", "tt0299930", "tt01186653", "tt00933005", "tt03832227", "tt1883367", "tt0804452", "tt4877122", "tt0115624", "tt0110978", "tt1666186", "tt0120185", "tt0400426", "tt0795461", "tt5690360", "tt1411664", "tt0450345", "tt0119707", "tt0372873", "tt0897361", "tt0120179", "tt0157262", "tt0811138", "tt0111301", "tt0291502", "tt0180052", "tt0094824", "tt0926129", "tt0107978", "tt0108255", "tt0479968", "tt0806147", "tt2278388", "tt0091064", "tt0116629", "tt3501632", "tt3896198", "tt0362270", "tt0097257", "tt5463162", "tt7959026", "tt1571234", "tt7125860", "tt7297030", "tt8267604", "tt5848272", "tt2709692", "tt6343314", "tt4123430", "tt1727824", "tt7401588", "tt6966692", "tt4532826", "tt5734576", "tt4218572"];
+var imdbIDs = ["tt0170016", "tt0314331", "tt0241527", "tt0319343", "tt0309987", "tt0338348", "tt0468569", "tt0120737", "tt1099212", "tt0367594", "tt0330373", "tt0377092", "tt0479143", "tt0304669", "tt0361748", "tt0477348", "tt0304141", "tt0167260", "tt1067106", "tt0317705", "tt0388419", "tt0454945", "tt0172495", "tt0409459", "tt0206634", "tt0482571", "tt0218967", "tt0307987", "tt0167261", "tt0486583", "tt0338013", "tt0416449", "tt0217869", "tt0401792", "tt0268978", "tt0099785", "tt0111070", "tt0111161", "tt0110912", "tt0120338", "tt0108052", "tt0109830", "tt0104431", "tt0112573", "tt0099685", "tt0107290", "tt0133093", "tt0102926", "tt0118715", "tt0107688", "tt0137523", "tt0119217", "tt0118749", "tt0116282", "tt0114369", "tt0120815", "tt0117737", "tt0103874", "tt0102798", "tt0113277", "tt0119116", "tt0119303", "tt0114709", "tt0103064", "tt0117509", "tt0103639", "tt0097958", "tt0085334", "tt0089927", "tt0095560", "tt0093389", "tt0095016", "tt0093779", "tt0093058", "tt0088763", "tt0083658", "tt0093773", "tt0086250", "tt1213644", "tt0270846", "tt0060666", "tt0804492", "tt1316037", "tt0317676", "tt0417056", "tt0339034", "tt0362165", "tt0369226", "tt0185183", "tt0096870", "tt0299930", "tt01186653", "tt00933005", "tt03832227", "tt1883367", "tt0804452", "tt4877122", "tt0115624", "tt0110978", "tt1666186", "tt0120185", "tt0400426", "tt0795461", "tt5690360", "tt1411664", "tt0450345", "tt0119707", "tt0372873", "tt0897361", "tt0120179", "tt0157262", "tt0811138", "tt0111301", "tt0291502", "tt0180052", "tt0094824", "tt0926129", "tt0107978", "tt0479968", "tt0806147", "tt2278388", "tt0091064", "tt0116629", "tt3501632", "tt3896198", "tt0362270", "tt0097257", "tt5463162", "tt7959026", "tt1571234", "tt7125860", "tt7297030", "tt8267604", "tt5848272", "tt2709692", "tt6343314", "tt4123430", "tt1727824", "tt7401588", "tt6966692", "tt4532826", "tt5734576", "tt4218572"];
 
 var movieCards = [];
 var movieName = [];
-var movieTrailers = [];
 var moviePosterURLs = [];
 var cardValues = [];
 var alreadySelected = [];
@@ -27,20 +26,28 @@ var titleChoice;
 var ytPlayerSRC = "https://www.youtube.com/embed/";
 var ytPlayerId;
 var dbIndex = 0;
-var numRound = 1;
+var numRound = 0;
 var P1Score = 0;
 var P2Score = 0;
+var roundWinP1 = 0;
+var roundWinP2 = 0;
 var roundsLeft = 3 - numRound;
 var numMovies;
 var posterIndex = 0;
 var tieGame = false;
-var cardsPlayed = 0;
+var cardsPlayed;
+var gameOn = false;
+var winsP1 = 0;
+var winsP2 = 0;
+var lossesP1 = 0;
+var lossesP2 = 0;
 
 // Firebase Refs
 var firebase = firebase.database();
 var cardDeckRef = firebase.ref("/CardDeck");
 var playersRef = firebase.ref("/Players");
 var currentTurnRef = firebase.ref("/Turn");
+var cardsPlayedRef = firebase.ref("/CardsPlayed");
 var roundsRef = firebase.ref("/Rounds");
 var username = "Guest";
 var currentPlayers = null;
@@ -50,6 +57,18 @@ var playerOneExists = false;
 var playerTwoExists = false;
 var playerOneData = null;
 var playerTwoData = null;
+
+// Animated Card Variables
+var cardplayed;
+var cardplayed1;
+var cardplayed2;
+var cardplayed3;
+var cardplayed4;
+var cardplayed5;
+var cardplayed6;
+var cardplayed7;
+var cardplayed8;
+var cardplayed9;
 
 // ***************************************
 
@@ -132,18 +151,8 @@ function pullTrailer(movie) {
     }).then(function(data) {
 
         var trailer = data.items[0];
-        // var trailerTitle = trailer.snippet.title;
-        //     trailerTitle = trailerTitle.toLowerCase();
         var trailerVideoID = trailer.id.videoId;
             ytPlayerID = trailerVideoID
-
-        // if (trailerTitle.includes(movie) !== -1) {
-        //     movieTrailers.push(trailerVideoID);
-        //     ytPlayerId = trailerVideoID;
-        // }
-        // else {
-        //     movieTrailers.push("Trailer Unavailable");
-        // }
 
         var youTubeVideo = $("<iframe>").attr("id", "trailerVideo").attr("src", ytPlayerSRC + ytPlayerID);
 
@@ -155,10 +164,16 @@ function dealCardsP1() {
 
     // Remove Join Game Modal, Start Game, and Show Stats
     $("#modal-row").hide();
-    $("#roundRem").html("Round: " + numRound + " / 3");
-    $("#pWins").html("+ " + P1Score);
-    $("#oWins").html("+ " + P2Score);
+    $("#roundRem").html("Rounds Played: " + numRound);
+    $("#pWins").html("W: " + winsP1);
+    $("#oWins").html("L: " + lossesP1);
     $("#numLeft, #oWins, #pWins").css("visibility", "visible");
+
+    if (numRound > 1) {
+
+        $("#pWins").html("+ " + playerOneData.RoundWins);
+        $("#oWins").html("+ " + playerTwoData.RoundWins);
+    }
 
     for (var i = 1; i <= 5; i++) {
 
@@ -201,15 +216,21 @@ function dealCardsP2() {
 
         // Remove Join Game Modal, Start Game, and Show Stats
         $("#modal-row").hide();
-        $("#roundRem").html("Round: " + numRound + " / 3");
-        $("#pWins").html(P1Score);
-        $("#oWins").html(P2Score);
+        $("#roundRem").html("Rounds Played: " + numRound);
+        $("#pWins").html("W: " + winsP2);
+        $("#oWins").html("L: " + lossesP2);
         $("#numLeft, #oWins, #pWins").css("visibility", "visible");
+
+        if (numRound > 1) {
+
+            $("#pWins").html("+ " + playerOneData.RoundWins);
+            $("#oWins").html("+ " + playerTwoData.RoundWins);
+        }
 
     for (var i = 1; i <= 5; i++) {
 
         var cardIMG = $("<img>").attr("src", moviePosterURLs[i + 4]);
-        var cardValue1 = $("<h3>").text(cardValues[i +4]).addClass("top-right");
+        var cardValue1 = $("<h3>").text(cardValues[i + 4]).addClass("top-right");
         var cardValue2 = $("<h3>").text(cardValues[i + 4]).addClass("bottom-left");
 
         $("#card-bodyP" + i).attr("data-index", (i + 4)).addClass("gameCard");
@@ -220,168 +241,178 @@ function dealCardsP2() {
     }
 }
 
-function nextRound() {
+// function nextRound() {
 
-    numRound++;
-    firebase.ref("/Round/" + numRound);
+//     cardsPlayed = 0;
+//     firebase.ref("/Round/" + numRound);
 
-    // P1 Deal
-    if (playerNum === 1) {
-        for (var i = 1; i <= 5; i++) {
+//     $("#modal-row").hide();
+//     $("#roundRem").html("Round: " + numRound + " / 3");
+//     $("#pWins").html("+ " + playerOneData.RoundWins);
+//     $("#oWins").html("+ " + playerTwoData.RoundWins);
 
-            var cardIMG = $("<img>").attr("src", moviePosterURLs[i + (numRound * 5) - 1]);
-            var cardValue1 = $("<h3>").text(cardValues[i + (numRound * 5) - 1]).addClass("top-right");
-            var cardValue2 = $("<h3>").text(cardValues[i + (numRound * 5) - 1]).addClass("bottom-left");
+//     playersRef.child("1").child("Score").set(0);
+//     playersRef.child("2").child("Score").set(0);
+//     cardsPlayedRef.set(0);
+
+
+//     // P1 Deal
+//     if (playerNum === 1) {
+//         for (var i = 1; i <= 5; i++) {
+
+//             var cardIMG = $("<img>").attr("src", moviePosterURLs[i + (numRound * 5) - 1]);
+//             var cardValue1 = $("<h3>").text(cardValues[i + (numRound * 5) - 1]).addClass("top-right");
+//             var cardValue2 = $("<h3>").text(cardValues[i + (numRound * 5) - 1]).addClass("bottom-left");
     
-            $("#card-bodyP" + i).attr("data-index", (i + (numRound * 5) - 1)).addClass("gameCard");
-            $("#card-bodyP" + i).html(cardIMG).append(cardValue1).append(cardValue2);
+//             $("#card-bodyP" + i).attr("data-index", (i + (numRound * 5) - 1)).addClass("gameCard");
+//             $("#card-bodyP" + i).html(cardIMG).append(cardValue1).append(cardValue2);
+
+//             $("#oCard" + i).css("display", "block");
+//             $("#pCard" + i).css("display", "block");
+
+//             replaceCards();
+//         }
+//     }
+//     else if (playerNum === 2) {
+//         // P2 Deal
+//         for (var i = 1; i <= 5; i++) {
+
+//             var cardIMG = $("<img>").attr("src", moviePosterURLs[i + (numRound * 5) + 4]);
+//             var cardValue1 = $("<h3>").text(cardValues[i + (numRound * 5) + 4]).addClass("top-right");
+//             var cardValue2 = $("<h3>").text(cardValues[i + (numRound * 5) + 4]).addClass("bottom-left");
+
+//             $("#card-bodyP" + i).attr("data-index", (i + (numRound * 5) + 4)).addClass("gameCard");
+//             $("#card-bodyP" + i).html(cardIMG).append(cardValue1).append(cardValue2);
+
+//             $("#oCard" + i).css("display", "block");
+//             $("#pCard" + i).css("display", "block");
+
+//             replaceCards();
+//         }
+//     }
+// }
+
+// function lastRound() {
+
+//     cardsPlayed = 0;
+//     firebase.ref("/Round/" + numRound);
+
+//     $("#modal-row").hide();
+//     $("#roundRem").html("Round: " + numRound + " / 3");
+//     $("#pWins").html("+ " + playerOneData.RoundWins);
+//     $("#oWins").html("+ " + playerTwoData.RoundWins);
+
+//     playersRef.child("1").child("Score").set(0);
+//     playersRef.child("2").child("Score").set(0);
+//     cardsPlayedRef.set(0);
+
+//     // P1 Deal
+//     if (playerNum === 1) {
+//         for (var i = 1; i <= 5; i++) {
+
+//             var cardIMG = $("<img>").attr("src", moviePosterURLs[i + (numRound * 10) - 1]);
+//             var cardValue1 = $("<h3>").text(cardValues[i + (numRound * 10) - 1]).addClass("top-right");
+//             var cardValue2 = $("<h3>").text(cardValues[i + (numRound * 10) - 1]).addClass("bottom-left");
     
-            $("#oCard" + i).css("display", "block");
-            $("#pCard" + i).css("display", "block");
-        }
-    }
-    else if (playerNum === 2) {
-    // P2 Deal
-        for (var i = 1; i <= 5; i++) {
-
-            var cardIMG = $("<img>").attr("src", moviePosterURLs[i + (numRound * 5) + 4]);
-            var cardValue1 = $("<h3>").text(cardValues[i + (numRound * 5) + 4]).addClass("top-right");
-            var cardValue2 = $("<h3>").text(cardValues[i + (numRound * 5) + 4]).addClass("bottom-left");
-
-            $("#card-bodyP" + i).attr("data-index", (i + (numRound * 5) + 4)).addClass("gameCard");
-            $("#card-bodyP" + i).html(cardIMG).append(cardValue1).append(cardValue2);
-
-            $("#oCard" + i).css("display", "block");
-            $("#pCard" + i).css("display", "block");
-        }
-    }
-}
-
-function lastRound() {
-
-    numRound++;
-    firebase.ref("/Round/" + numRound);
-
-    // P1 Deal
-    if (playerNum === 1) {
-        for (var i = 1; i <= 5; i++) {
-
-            var cardIMG = $("<img>").attr("src", moviePosterURLs[i + (numRound * 10) - 1]);
-            var cardValue1 = $("<h3>").text(cardValues[i + (numRound * 10) - 1]).addClass("top-right");
-            var cardValue2 = $("<h3>").text(cardValues[i + (numRound * 10) - 1]).addClass("bottom-left");
+//             $("#card-bodyP" + i).attr("data-index", (i + (numRound * 10) - 1)).addClass("gameCard");
+//             $("#card-bodyP" + i).html(cardIMG).append(cardValue1).append(cardValue2);
     
-            $("#card-bodyP" + i).attr("data-index", (i + (numRound * 10) - 1)).addClass("gameCard");
-            $("#card-bodyP" + i).html(cardIMG).append(cardValue1).append(cardValue2);
-    
-            $("#oCard" + i).css("display", "block");
-            $("#pCard" + i).css("display", "block");
-        }
-    }
-    else if (playerNum === 2) {
-    // P2 Deal
-        for (var i = 1; i <= 5; i++) {
+//             $("#oCard" + i).css("display", "block");
+//             $("#pCard" + i).css("display", "block");
 
-            var cardIMG = $("<img>").attr("src", moviePosterURLs[i + (numRound * 10) + 4]);
-            var cardValue1 = $("<h3>").text(cardValues[i + (numRound * 10) + 4]).addClass("top-right");
-            var cardValue2 = $("<h3>").text(cardValues[i + (numRound * 10) + 4]).addClass("bottom-left");
+//             replaceCards();
+//         }
+//     }
+//     else if (playerNum === 2) {
+//         // P2 Deal
+//         for (var i = 1; i <= 5; i++) {
 
-            $("#card-bodyP" + i).attr("data-index", (i + (numRound * 10) + 4)).addClass("gameCard");
-            $("#card-bodyP" + i).html(cardIMG).append(cardValue1).append(cardValue2);
+//             var cardIMG = $("<img>").attr("src", moviePosterURLs[i + (numRound * 10) + 4]);
+//             var cardValue1 = $("<h3>").text(cardValues[i + (numRound * 10) + 4]).addClass("top-right");
+//             var cardValue2 = $("<h3>").text(cardValues[i + (numRound * 10) + 4]).addClass("bottom-left");
 
-            $("#oCard" + i).css("display", "block");
-            $("#pCard" + i).css("display", "block");
-        }
-    }
-}
+//             $("#card-bodyP" + i).attr("data-index", (i + (numRound * 10) + 4)).addClass("gameCard");
+//             $("#card-bodyP" + i).html(cardIMG).append(cardValue1).append(cardValue2);
+
+//             $("#oCard" + i).css("display", "block");
+//             $("#pCard" + i).css("display", "block");
+
+//             replaceCards();
+//         }
+//     }
+// }
 
 // ***************************************
 
 // CARD CLICK FUNCTIONS
 $(document).ready(function() {
    
-    var cardplayed = $("#pCard1");
-    var cardplayed1 = $("#oCard5");
+    cardplayed = $("#pCard1");
+    cardplayed1 = $("#oCard5");
 
     $("#pCard1").on("click", function() {
 
-        if ($(".clicked") !== false) {
-            $(".clicked").css( "zIndex", -10 );
-            $(".clicked").animate({ top: "0px", left:"0px"  }, "normal");
-        }
-
-      cardplayed.animate({ top: "-=250px", left:"120px"  }, "normal"); 
-      cardplayed1.animate({ bottom: "-=213px", right:"120px"  }, "normal");
-      $("#pCard1").addClass("clicked", true);
-      $("#oCard5").addClass("clicked", true);
+        cardplayed.animate({top: "-=250px", left:"120px"}, "normal"); 
+        cardplayed1.animate({bottom: "-=213px", right:"120px"}, "normal");
+        $("#pCard1").addClass("clicked").attr("data-status", "played");
+        $("#oCard5").addClass("clicked").attr("data-status", "played");
       
     });
 });
 
 $(document).ready(function() {
     
-    var cardplayed2 = $("#pCard2");
-    var cardplayed3 = $("#oCard4");
+    cardplayed2 = $("#pCard2");
+    cardplayed3 = $("#oCard4");
 
     $("#pCard2").on("click", function() {
-        if ($(".clicked") !== false) {
-            $(".clicked").css( "zIndex", -10 );
-            $(".clicked").animate({ top: "0px", left:"0px"  }, "normal");
-        }
-      cardplayed2.animate({ top: "-=250px", left:"-=71px"  }, "normal");  
-      cardplayed3.animate({ bottom: "-=213px", right:"-=71px"  }, "normal");
-      $("#pCard2").addClass("clicked", true);
-      $("#oCard4").addClass("clicked", true);
+
+        cardplayed2.animate({top: "-=250px", left:"-=71px"}, "normal");  
+        cardplayed3.animate({bottom: "-=213px", right:"-=71px"}, "normal");
+        $("#pCard2").addClass("clicked").attr("data-status", "played");
+        $("#oCard4").addClass("clicked").attr("data-status", "played");
     });      
 });
    
 $(document).ready(function() {
        
-    var cardplayed4 = $("#pCard3");
-    var cardplayed5 = $("#oCard3");
+    cardplayed4 = $("#pCard3");
+    cardplayed5 = $("#oCard3");
     
     $("#pCard3").on("click", function() {
-        if ($(".clicked") !== false) {
-            $(".clicked").css( "zIndex", -10 );
-            $(".clicked").animate({ top: "0px", left:"0px"  }, "normal");
-        }
-        cardplayed4.animate({ top: "-=250px", left:"-=260px"  }, "normal");
-        cardplayed5.animate({ bottom: "-=213px", right:"-=260px"  }, "normal");
-        $("#pCard3").addClass("clicked", true);
-        $("#oCard3").addClass("clicked", true);
+
+        cardplayed4.animate({top: "-=250px", left:"-=260px"}, "normal");
+        cardplayed5.animate({bottom: "-=213px", right:"-=260px"}, "normal");
+        $("#pCard3").addClass("clicked").attr("data-status", "played");
+        $("#oCard3").addClass("clicked").attr("data-status", "played");
     }); 
 });
     
 $(document).ready(function() {
 
-    var cardplayed6 = $("#pCard4");
-    var cardplayed7 = $("#oCard2");
+    cardplayed6 = $("#pCard4");
+    cardplayed7 = $("#oCard2");
     
     $("#pCard4").on("click", function() {
-        if ($(".clicked") !== false) {
-            $(".clicked").css( "zIndex", -10 );
-            $(".clicked").animate({ top: "0px", left:"0px"  }, "normal");
-        }
-        cardplayed6.animate({ top: "-=250px", left:"-=447px"  }, "normal");
-        cardplayed7.animate({ bottom: "-=213px", right:"-=447px"  }, "normal");
-        $("#pCard4").addClass("clicked", true);
-        $("#oCard2").addClass("clicked", true);
+
+        cardplayed6.animate({top: "-=250px", left:"-=447px"}, "normal");
+        cardplayed7.animate({bottom: "-=213px", right:"-=447px"}, "normal");
+        $("#pCard4").addClass("clicked").attr("data-status", "played");
+        $("#oCard2").addClass("clicked").attr("data-status", "played");
     }); 
 });
     
 
 $(document).ready(function() {
-    var cardplayed8 = $("#pCard5");
-    var cardplayed9 = $("#oCard1");
+    cardplayed8 = $("#pCard5");
+    cardplayed9 = $("#oCard1");
 
     $("#pCard5").on("click", function() {
-        if ($(".clicked") !== false) {
-            $(".clicked").css( "zIndex", -10 );
-            $(".clicked").animate({ top: "0px", left:"0px"  }, "normal");
-        }
-    cardplayed8.animate({ top: "-=250px", left:"-=636px"  }, "normal");
-    cardplayed9.animate({ bottom: "-=213px", right:"-=636px"  }, "normal");
-    $("#pCard5").addClass("clicked", true);
-    $("#oCard1").addClass("clicked", true);
+
+        cardplayed8.animate({top: "-=250px", left:"-=636px"}, "normal");
+        cardplayed9.animate({bottom: "-=213px", right:"-=636px"}, "normal");
+        $("#pCard5").addClass("clicked").attr("data-status", "played");
+        $("#oCard1").addClass("clicked").attr("data-status", "played");
     });
 });
 
@@ -444,8 +475,7 @@ playersRef.on("value", function(snapshot) {
     if (playerTwoExists) {
         $("#oName").text(playerTwoData.Name);
         $("#oScore").text("+ " + playerTwoData.Score);
-
-        // dealCardsP1();
+        playersRef.child("2").child("RoundWins").set(0);
     }    
     else {
     // If No Player 2, Clear Win/Loss Data and Show Waiting
@@ -454,19 +484,13 @@ playersRef.on("value", function(snapshot) {
     }
 });
 
-// roundsRef.on("value", function(snapshot) {
-
-//         console.log(snapshot.val());
-        
-        
-// });
-
 // Click Event for Cards Dealt
 $(document).on("click", ".gameCard", function() {
   
     // Grabs "data-index" From Card Choice
     var clickIndex = $(this).attr("data-index");
     var clickChoice = cardValues[clickIndex];
+    $(this).attr("data-status", "played");
     // console.log(playerRef);
     console.log(clickChoice);
   
@@ -483,6 +507,15 @@ $(document).on("click", ".gameCard", function() {
     currentTurnRef.transaction(function(turn) {
       return turn + 1;
     });
+
+    cardsPlayedRef.transaction(function(CardsPlayed) {
+        return CardsPlayed + 1;
+    });
+});
+
+cardsPlayedRef.on("value", function(snapshot) {
+    cardsPlayed = snapshot.val();
+    // cardsPlayed += 1;
 });
 
 // Detect Changes in Current Turn DB Key
@@ -503,6 +536,7 @@ currentTurnRef.on("value", function(snapshot) {
             $("#joinGame").append($("<h4>").html("Waiting for " + playerTwoData.Name + " to Play...<hr>"));
             $("#joinGame").append($("<img>").attr("src", "assets/images/loading.gif"));
         }
+
         else if (currentTurn === 1 && playerNum === 2) {
             $("#modal-row").show();
             $(".modal-content").attr("class", "modal-content-playing");
@@ -516,50 +550,35 @@ currentTurnRef.on("value", function(snapshot) {
         // Turn 1
         if (currentTurn === 1) {
             // If Current Player's Turn, Update Text
-            if (currentTurn === playerNum && numRound === 1) {
+            if (currentTurn === playerNum) {
 
                 dealCardsP1();
             }
   
-            // Highlight Active Player [[UPDATE STYLE if desired]]
+            // Highlight Active Player
             $("#player").css("filter", "invert(100%)");
             $("#opponent").css("filter", "invert(0%)");
         }
+
         else if (currentTurn === 2) {
             // If Current Player's Turn, Update Text
             if (currentTurn === playerNum) {
-                $("#current-turn").text("It's Your Turn!");
 
                 getMovieCount();
-            }
-            else {
-                // If Not Current Player's Turn, Update Text to Say Waiting
-                $("#current-turn").text("Waiting for " + playerTwoData.Name + " to play.");
-            }
-            
-            // Highlight Active Player [[UPDATE STYLE if desired]]
+            }            
+            // Highlight Active Player
             $("#opponent").css("filter", "invert(100%)");
             $("#player").css("filter", "invert(0%)");
         }
+
         else if (currentTurn === 3) {
             // Check for Win/Lose Game Logic and Reset Turn
             gameLogic(playerOneData.Choice, playerTwoData.Choice);
-  
-            // Reveal Player/Opp Choices [[PLAY TRAILER IN MODAL HERE?]]
-    
+
             //  Reset After Timeout
             var moveOn = function() {
 
-                // var index;
-
-                // playerRef.once("value").then(function(snapshot) {
-
-                //     index = snapshot.val().ChoiceIndex;
-                //     console.log(index);
-                //     console.log(pCard)
-
-                //     $("#pCard" + (index + 1)).css("z-index", -10);
-                // });
+                $(".clicked").css("visibility", "hidden");
   
                 // Check to Ensure Players Have Not Left Before Timeout
                 if (playerOneExists && playerTwoExists) {
@@ -567,8 +586,8 @@ currentTurnRef.on("value", function(snapshot) {
                 }
             };
   
-        //  Show Card Play Results for 3 Seconds
-        setTimeout(moveOn, 1000 * 3);
+            //  Show Card Play Results for 3 Seconds
+            setTimeout(moveOn, 1000 * 3);
         }
         else {
 
@@ -585,7 +604,7 @@ currentTurnRef.on("value", function(snapshot) {
     }
 });
   
-// When Player Joins Game, Check for 2 Players. If Yes, "Start" Button Will Appear
+// When Player Joins Game, Check for 2 Players.
 playersRef.on("child_added", function(snapshot) {
 
     if (currentPlayers === 1) {
@@ -636,7 +655,7 @@ function joinGame() {
             Score: 0
         });
 
-        // Create DB Key Based on Current Round
+        // Create DB Key Round Results
         roundRef = firebase.ref("/Round/" + numRound);
         roundRef.set({
             P1Score: P1Score,
@@ -655,6 +674,9 @@ function joinGame() {
 
         // If Disconnect, Clear Round
         roundRef.onDisconnect().remove();
+
+        // On Disconnect, Clear Cards Played
+        cardsPlayedRef.onDisconnect().remove();
     }
     else {
         // If Current Players is P2, New Player Can't Join
@@ -673,16 +695,18 @@ function gameLogic(player1choice, player2choice) {
 
         $("#joinGame").append($("<h4>").html("WINNER!<hr>"));
         $("#joinGame").append($("<h3>").html(playerOneData.Name));
-        // $("#joinGame").append($("<img>").attr("src", "assets/images/loading.gif"));
 
-        if (tieGame === true && playerNum ===1) {
+        if (tieGame === true && playerNum === 1) {
             playersRef.child("1").child("Score").set(playerOneData.Score + 2);
-            
+   
             tieGame = false;
         }
         else if (tieGame === false && playerNum ===1) {
             playersRef.child("1").child("Score").set(playerOneData.Score + 1);
+
         }
+
+        flipCard();
     };
 
     var playerTwoWon = function() {
@@ -696,11 +720,16 @@ function gameLogic(player1choice, player2choice) {
 
         if (tieGame === true && playerNum === 2) {
             playersRef.child("2").child("Score").set(playerTwoData.Score + 2);
+
             tieGame = false;
         }
         else if (tieGame === false && playerNum === 2) {
             playersRef.child("2").child("Score").set(playerTwoData.Score + 1);
+
         }
+
+        flipCard();
+        
     };
 
     // Game Conditional Logic -- What happens at tie?
@@ -714,19 +743,96 @@ function gameLogic(player1choice, player2choice) {
 
         $("#joinGame").append($("<h3>").html("It's a tie!<hr>"));
         $("#joinGame").append($("<h4>").html("Next card is worth 2 points!"));
+
     };
 
-    if (playersRef.once("value").then(function(snapshot) {snapshot.val()[2].CardsPlayed}) === 5) {
+    if (player1choice === player2choice) {
+
+        tie();
+        setTimeout(gameCheck, 1000 * 2);
+    }
+
+    else if (player1choice < player2choice) {
+
+        playerTwoWon();
+        setTimeout(gameCheck, 1000 * 2);
+    }
+
+    else if (player1choice > player2choice) {
+
+        playerOneWon();
+        setTimeout(gameCheck, 1000 * 2);
+    }
+}
+
+function flipCard() {
+
+    if (playerNum === 1) {
+
+        var cardIMG = $("<img>").attr("src", moviePosterURLs[playerTwoData.ChoiceIndex]);
+        var cardValue1 = $("<h3>").text(cardValues[playerTwoData.ChoiceIndex]).addClass("top-right");
+        var cardValue2 = $("<h3>").text(cardValues[playerTwoData.ChoiceIndex]).addClass("bottom-left");
+
+        $(".oCards > .clicked").html(cardIMG).append(cardValue1).append(cardValue2);
+    }
+    else if (playerNum === 2) {
+
+        var cardIMG = $("<img>").attr("src", moviePosterURLs[playerOneData.ChoiceIndex]);
+        var cardValue1 = $("<h3>").text(cardValues[playerOneData.ChoiceIndex]).addClass("top-right");
+        var cardValue2 = $("<h3>").text(cardValues[playerOneData.ChoiceIndex]).addClass("bottom-left");
+
+        $(".oCards > .clicked").html(cardIMG).append(cardValue1).append(cardValue2);
+    }
+}
+
+function resetGame() {
+
+    cardDeckRef.remove();
+    pullCards();
+
+    movieCards = [];
+    movieName = [];
+    moviePosterURLs = [];
+    cardValues = [];
+    alreadySelected = [];
+    dbIndex = 0;
+    
+    replaceCards();
+
+    currentTurnRef.set(1);
+    cardsPlayedRef.set(0);
+    playersRef.child("1").child("Score").set(0);
+    playersRef.child("2").child("Score").set(0);
+
+}
+
+function gameCheck() {
+
+    if (cardsPlayed === 10) {
 
         if (playerOneData.Score > playerTwoData.Score) {
 
             $("#modal-row").show();
             $(".modal-content").attr("class", "modal-content-playing");
             $("#joinGame").empty();
-    
+        
             $("#joinGame").append($("<h2>").html("WINNER!<hr>"));
-            $("#joinGame").append($("<h3>").html(playerOneData.Name + " wins the round!"));
-            
+            $("#joinGame").append($("<h3>").html(playerOneData.Name + " wins the Game!"));
+
+            flipCard();
+            playerOneData.RoundWins++;
+
+            numRound++;
+            winsP1++;
+            lossesP2++;
+            resetGame();
+
+            // if (numRound === 2) {
+            //     setTimeout(nextRound, 1000 * 3);
+            // }
+            // else if (numRound === 3) {
+            //     setTimeout(lastRound, 1000 * 3);
+            // }
         }
         else if (playerOneData.Score < playerTwoData.Score) {
 
@@ -735,137 +841,68 @@ function gameLogic(player1choice, player2choice) {
             $("#joinGame").empty();
         
             $("#joinGame").append($("<h2>").html("WINNER!<hr>"));
-            $("#joinGame").append($("<h3>").html(playerTwoData.Name + " wins the round!"));
+            $("#joinGame").append($("<h3>").html(playerTwoData.Name + " wins the Game!"));
+
+            flipCard();
+            playerTwoData.RoundWins++;
+
+            numRound++;
+            winsP2++;
+            lossesP1++;
+            resetGame();
+
+            // if (numRound === 2) {
+            //     setTimeout(nextRound, 1000 * 3);
+            // }
+            // else if (numRound === 3) {
+            //     setTimeout(lastRound, 1000 * 3);
+            // }
+        }
+        else if (playerOneData.Score === playerTwoData.Score) {
+
+            $("#modal-row").show();
+            $(".modal-content").attr("class", "modal-content-playing");
+            $("#joinGame").empty();
+        
+            $("#joinGame").append($("<h2>").html("It's a TIE!<hr>"));
+            $("#joinGame").append($("<h3>").html("+ 1 All Around!"));
+
+            flipCard();
+            playerOneData.RoundWins++;
+            playerTwoData.RoundWins++;
+
+            numRound++;
+            winsP1++;
+            winsP2++;
+            resetGame();
+
+            // if (numRound === 2) {
+            //     setTimeout(nextRound, 1000 * 3);
+            // }
+            // else if (numRound === 3) {
+            //     setTimeout(lastRound, 1000 * 3);
+            // }
         }
     }
+};
 
-    if (player1choice === player2choice) {
-        tie();
-    }
+// Replace Cards
+function replaceCards() {
 
-    else if (player1choice < player2choice) {
-        playerTwoWon();
-    }
-
-    else if (player1choice > player2choice) {
-        playerOneWon();
-    }
-
+    cardplayed.css({"top": "0", "left": "0", "visibility": "visible"}).removeClass("clicked").attr("data-status", "");
+    cardplayed1.css({"bottom": "0", "right": "0", "visibility": "visible"}).removeClass("clicked").attr("data-status", "").html("<img src='assets/images/img-7-1.png'/>");
+    cardplayed2.css({"top": "0", "left": "0", "visibility": "visible"}).removeClass("clicked").attr("data-status", "");
+    cardplayed3.css({"bottom": "0", "right": "0", "visibility": "visible"}).removeClass("clicked").attr("data-status", "").html("<img src='assets/images/img-7-1.png'/>");
+    cardplayed4.css({"top": "0", "left": "0", "visibility": "visible"}).removeClass("clicked").attr("data-status", "");
+    cardplayed5.css({"bottom": "0", "right": "0", "visibility": "visible"}).removeClass("clicked").attr("data-status", "").html("<img src='assets/images/img-7-1.png'/>");
+    cardplayed6.css({"top": "0", "left": "0", "visibility": "visible"}).removeClass("clicked").attr("data-status", "");
+    cardplayed7.css({"bottom": "0", "right": "0", "visibility": "visible"}).removeClass("clicked").attr("data-status", "").html("<img src='assets/images/img-7-1.png'/>");
+    cardplayed8.css({"top": "0", "left": "0", "visibility": "visible"}).removeClass("clicked").attr("data-status", "");
+    cardplayed9.css({"bottom": "0", "right": "0", "visibility": "visible"}).removeClass("clicked").attr("data-status", "").html("<img src='assets/images/img-7-1.png'/>");
 }
 
+// Reset Page
 function restart() {
 
     location.reload();
 }
-
-
-
-
-
-// Deal Cards for Round
-// $(document).on("click", "#gameStart", function() {
-    
-//     dealCards();
-
-//     // Create DB Key Based on Assigned Player Number
-//     playerRef = firebase.ref("/Players/" + playerNum);
-
-//     // Create Player Object
-//     playerRef.set({
-//     Name: username,
-//     Score: 0
-//     });
-
-// });
-
-// CREATE onClick function to set TrailerID attribute to corresponding card in Firebase when movie is selected.
-
-
-// TEST modal (onClick) logic
-// $(document).on("click", "#playMovie", function() {
-
-//     for (var i = 0; i < 10; i++) {
-//         var mov = $("<button>").html(movieName[i]).attr("data-title", movieName[i]).attr("data-index", i);
-
-//         $("#movie-list").append(mov);
-//     }
-
-//     $("#movie-list > button").on("click", function() {
-
-//         console.log(this);
-
-//         var movtitle = $(this).attr("data-title").toLowerCase();
-
-//         pullTrailer(movtitle);
-
-//         setTimeout(function() {
-
-    //         $("#ytplayer").attr("src", ytPlayerSRC + ytPlayerId);
-    //     }, 1000 * 0.5);
-    // });
-
-//     var modal = $(".modal");
-//     var btn = $("#movie-list > button");
-//     var exit = $("#close");
-
-//     btn.on("click", function() {
-//         setTimeout(function() {
-//             modal.css("display", "block");
-//         }, 1000 * 0.5);
-//     });
-
-//     exit.on("click", function() {
-//         modal.css("display", "none");
-//     });
-
-//     $(window).on("click", function(event) {
-
-//         if (event.target === modal[0]) {
-//             modal.css("display", "none");
-//         }
-//     });
-// });
-
-// Chatbox Input Listener
-// $("#chat-input").keypress(function(event) {
-    
-//     if (event.which === 13 && $("#chat-input").val() !== "") {
-
-//         var message = $("#chat-input").val();
-  
-//         chatData.push({
-//         Name: username,
-//         Message: message,
-//         Time: firebase.database.ServerValue.TIMESTAMP,
-//         idNum: playerNum
-//     });
-  
-//       $("#chat-input").val("");
-//     }
-// });
-
-// Update Chat on Modal @ New Message Detected - Ordered by 'Time' Value
-// chatData.orderByChild("time").on("child_added", function(snapshot) {
-//     $("#chat-messages").append(
-//       $("<p>").addClass("player-" + snapshot.val().idNum),
-//       $("<span>").text(snapshot.val().name + ":" + snapshot.val().message)
-//     );
-  
-//     // Keeps div Scrolled to Bottom
-//     $("#chat-messages").scrollTop($("#chat-messages")[0].scrollHeight);
-// });
-
-// function getMovieSpecs(index) {
-
-//     cardDeckRef.once("value").then(function(snapshot) {
-
-//         console.log(index);
-
-//         if (snapshot.val()[index].Poster === undefined) {
-//             console.log(snapshot.val()[index].Title);
-//         }
-//         else {
-          
-//         }
-//     });
-// }
