@@ -584,6 +584,10 @@ currentTurnRef.on("value", function(snapshot) {
                 if (playerOneExists && playerTwoExists) {
                     currentTurnRef.set(1);
                 }
+
+                if (cardsPlayed === 10) {
+                    gameCheck();
+                }
             };
   
             //  Show Card Play Results for 3 Seconds
@@ -744,24 +748,26 @@ function gameLogic(player1choice, player2choice) {
         $("#joinGame").append($("<h3>").html("It's a tie!<hr>"));
         $("#joinGame").append($("<h4>").html("Next card is worth 2 points!"));
 
+        flipCard();
+
     };
 
     if (player1choice === player2choice) {
 
         tie();
-        setTimeout(gameCheck, 1000 * 2);
+        setTimeout(gameCheck, 1000);
     }
 
     else if (player1choice < player2choice) {
 
         playerTwoWon();
-        setTimeout(gameCheck, 1000 * 2);
+        setTimeout(gameCheck, 1000);
     }
 
     else if (player1choice > player2choice) {
 
         playerOneWon();
-        setTimeout(gameCheck, 1000 * 2);
+        setTimeout(gameCheck, 1000);
     }
 }
 
@@ -787,7 +793,6 @@ function flipCard() {
 
 function resetGame() {
 
-    cardDeckRef.remove();
     pullCards();
 
     movieCards = [];
@@ -817,7 +822,7 @@ function gameCheck() {
             $("#joinGame").empty();
         
             $("#joinGame").append($("<h2>").html("WINNER!<hr>"));
-            $("#joinGame").append($("<h3>").html(playerOneData.Name + " wins the Game!"));
+            $("#joinGame").append($("<h3>").html(playerOneData.Name + " wins the Game!<hr>"));
 
             flipCard();
             playerOneData.RoundWins++;
@@ -825,6 +830,8 @@ function gameCheck() {
             numRound++;
             winsP1++;
             lossesP2++;
+
+            cardDeckRef.remove();
             resetGame();
 
             // if (numRound === 2) {
@@ -849,6 +856,8 @@ function gameCheck() {
             numRound++;
             winsP2++;
             lossesP1++;
+
+            cardDeckRef.remove();
             resetGame();
 
             // if (numRound === 2) {
@@ -874,6 +883,8 @@ function gameCheck() {
             numRound++;
             winsP1++;
             winsP2++;
+
+            cardDeckRef.remove();
             resetGame();
 
             // if (numRound === 2) {
