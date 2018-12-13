@@ -1,14 +1,13 @@
 // Firebase Link & Config
 var config = {
-    apiKey: "AIzaSyC-yY5vNVc5WyXFJ6YOEwXCHmbnzRkbL_g",
-    authDomain: "movie-cards-2018.firebaseapp.com",
-    databaseURL: "https://movie-cards-2018.firebaseio.com",
-    projectId: "movie-cards-2018",
-    storageBucket: "movie-cards-2018.appspot.com",
-    messagingSenderId: "355532779763"
-};
-
-firebase.initializeApp(config);
+    apiKey: "AIzaSyA_fE6Z-rOHkmhKfuL56NlnYU5TkJ2itos",
+    authDomain: "project-1-7730f.firebaseapp.com",
+    databaseURL: "https://project-1-7730f.firebaseio.com",
+    projectId: "project-1-7730f",
+    storageBucket: "project-1-7730f.appspot.com",
+    messagingSenderId: "107395845895"
+  };
+  firebase.initializeApp(config);
 
 // ***************************************
 
