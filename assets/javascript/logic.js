@@ -221,6 +221,7 @@ function dealCardsP2() {
         $("#oWins").html("L: " + lossesP2);
         $("#numLeft, #oWins, #pWins").css("visibility", "visible");
 
+
         if (numRound > 1) {
 
             $("#pWins").html("+ " + playerOneData.RoundWins);
@@ -584,14 +585,13 @@ currentTurnRef.on("value", function(snapshot) {
                 if (playerOneExists && playerTwoExists) {
                     currentTurnRef.set(1);
                 }
-
-                if (cardsPlayed === 10) {
                     gameCheck();
-                }
             };
   
             //  Show Card Play Results for 3 Seconds
-            setTimeout(moveOn, 1000 * 3);
+            if (cardsPlayed < 10) {
+                setTimeout(moveOn, 1000 * 3);
+            }
         }
         else {
 
@@ -793,21 +793,22 @@ function flipCard() {
 
 function resetGame() {
 
-    pullCards();
-
     movieCards = [];
     movieName = [];
     moviePosterURLs = [];
     cardValues = [];
     alreadySelected = [];
     dbIndex = 0;
-    
-    replaceCards();
 
     currentTurnRef.set(1);
     cardsPlayedRef.set(0);
     playersRef.child("1").child("Score").set(0);
     playersRef.child("2").child("Score").set(0);
+
+    setTimeout(pullCards, 1000 * 1);
+    setTimeout(dealCardsP1, 2);
+    setTimeout(getMovieCount, 1000 * 3);
+    setTimeout(replaceCards, 1000 * 3);
 
 }
 
@@ -816,13 +817,14 @@ function gameCheck() {
     if (cardsPlayed === 10) {
 
         if (playerOneData.Score > playerTwoData.Score) {
+            $(".clicked").css("visibility", "hidden");
 
             $("#modal-row").show();
             $(".modal-content").attr("class", "modal-content-playing");
             $("#joinGame").empty();
         
             $("#joinGame").append($("<h2>").html("WINNER!<hr>"));
-            $("#joinGame").append($("<h3>").html(playerOneData.Name + " wins the Game!<hr>"));
+            $("#joinGame").append($("<h3>").html(playerOneData.Name + " wins the Game!"));
 
             flipCard();
             playerOneData.RoundWins++;
@@ -831,8 +833,8 @@ function gameCheck() {
             winsP1++;
             lossesP2++;
 
-            cardDeckRef.remove();
-            resetGame();
+            setTimeout(restart, 1000 * 3);
+            // resetGame();
 
             // if (numRound === 2) {
             //     setTimeout(nextRound, 1000 * 3);
@@ -842,6 +844,7 @@ function gameCheck() {
             // }
         }
         else if (playerOneData.Score < playerTwoData.Score) {
+            $(".clicked").css("visibility", "hidden");
 
             $("#modal-row").show();
             $(".modal-content").attr("class", "modal-content-playing");
@@ -857,8 +860,8 @@ function gameCheck() {
             winsP2++;
             lossesP1++;
 
-            cardDeckRef.remove();
-            resetGame();
+            setTimeout(restart, 1000 * 3);
+            // resetGame();
 
             // if (numRound === 2) {
             //     setTimeout(nextRound, 1000 * 3);
@@ -868,13 +871,14 @@ function gameCheck() {
             // }
         }
         else if (playerOneData.Score === playerTwoData.Score) {
+            $(".clicked").css("visibility", "hidden");
 
             $("#modal-row").show();
             $(".modal-content").attr("class", "modal-content-playing");
             $("#joinGame").empty();
         
             $("#joinGame").append($("<h2>").html("It's a TIE!<hr>"));
-            $("#joinGame").append($("<h3>").html("+ 1 All Around!"));
+            $("#joinGame").append($("<h3>").html("High 5's All Around!"));
 
             flipCard();
             playerOneData.RoundWins++;
@@ -884,8 +888,8 @@ function gameCheck() {
             winsP1++;
             winsP2++;
 
-            cardDeckRef.remove();
-            resetGame();
+            setTimeout(restart, 1000 * 3);
+            // resetGame();
 
             // if (numRound === 2) {
             //     setTimeout(nextRound, 1000 * 3);
