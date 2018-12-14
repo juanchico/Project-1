@@ -29,14 +29,10 @@ var dbIndex = 0;
 var numRound = 0;
 var P1Score = 0;
 var P2Score = 0;
-var roundWinP1 = 0;
-var roundWinP2 = 0;
 var roundsLeft = 3 - numRound;
 var numMovies;
-var posterIndex = 0;
 var tieGame = false;
 var cardsPlayed;
-var gameOn = false;
 var winsP1 = 0;
 var winsP2 = 0;
 var lossesP1 = 0;
@@ -48,7 +44,6 @@ var cardDeckRef = firebase.ref("/CardDeck");
 var playersRef = firebase.ref("/Players");
 var currentTurnRef = firebase.ref("/Turn");
 var cardsPlayedRef = firebase.ref("/CardsPlayed");
-var roundsRef = firebase.ref("/Rounds");
 var username = "Guest";
 var currentPlayers = null;
 var currentTurn = null;
@@ -241,107 +236,6 @@ function dealCardsP2() {
         $("#pCard" + i).css("display", "block");
     }
 }
-
-// function nextRound() {
-
-//     cardsPlayed = 0;
-//     firebase.ref("/Round/" + numRound);
-
-//     $("#modal-row").hide();
-//     $("#roundRem").html("Round: " + numRound + " / 3");
-//     $("#pWins").html("+ " + playerOneData.RoundWins);
-//     $("#oWins").html("+ " + playerTwoData.RoundWins);
-
-//     playersRef.child("1").child("Score").set(0);
-//     playersRef.child("2").child("Score").set(0);
-//     cardsPlayedRef.set(0);
-
-
-//     // P1 Deal
-//     if (playerNum === 1) {
-//         for (var i = 1; i <= 5; i++) {
-
-//             var cardIMG = $("<img>").attr("src", moviePosterURLs[i + (numRound * 5) - 1]);
-//             var cardValue1 = $("<h3>").text(cardValues[i + (numRound * 5) - 1]).addClass("top-right");
-//             var cardValue2 = $("<h3>").text(cardValues[i + (numRound * 5) - 1]).addClass("bottom-left");
-    
-//             $("#card-bodyP" + i).attr("data-index", (i + (numRound * 5) - 1)).addClass("gameCard");
-//             $("#card-bodyP" + i).html(cardIMG).append(cardValue1).append(cardValue2);
-
-//             $("#oCard" + i).css("display", "block");
-//             $("#pCard" + i).css("display", "block");
-
-//             replaceCards();
-//         }
-//     }
-//     else if (playerNum === 2) {
-//         // P2 Deal
-//         for (var i = 1; i <= 5; i++) {
-
-//             var cardIMG = $("<img>").attr("src", moviePosterURLs[i + (numRound * 5) + 4]);
-//             var cardValue1 = $("<h3>").text(cardValues[i + (numRound * 5) + 4]).addClass("top-right");
-//             var cardValue2 = $("<h3>").text(cardValues[i + (numRound * 5) + 4]).addClass("bottom-left");
-
-//             $("#card-bodyP" + i).attr("data-index", (i + (numRound * 5) + 4)).addClass("gameCard");
-//             $("#card-bodyP" + i).html(cardIMG).append(cardValue1).append(cardValue2);
-
-//             $("#oCard" + i).css("display", "block");
-//             $("#pCard" + i).css("display", "block");
-
-//             replaceCards();
-//         }
-//     }
-// }
-
-// function lastRound() {
-
-//     cardsPlayed = 0;
-//     firebase.ref("/Round/" + numRound);
-
-//     $("#modal-row").hide();
-//     $("#roundRem").html("Round: " + numRound + " / 3");
-//     $("#pWins").html("+ " + playerOneData.RoundWins);
-//     $("#oWins").html("+ " + playerTwoData.RoundWins);
-
-//     playersRef.child("1").child("Score").set(0);
-//     playersRef.child("2").child("Score").set(0);
-//     cardsPlayedRef.set(0);
-
-//     // P1 Deal
-//     if (playerNum === 1) {
-//         for (var i = 1; i <= 5; i++) {
-
-//             var cardIMG = $("<img>").attr("src", moviePosterURLs[i + (numRound * 10) - 1]);
-//             var cardValue1 = $("<h3>").text(cardValues[i + (numRound * 10) - 1]).addClass("top-right");
-//             var cardValue2 = $("<h3>").text(cardValues[i + (numRound * 10) - 1]).addClass("bottom-left");
-    
-//             $("#card-bodyP" + i).attr("data-index", (i + (numRound * 10) - 1)).addClass("gameCard");
-//             $("#card-bodyP" + i).html(cardIMG).append(cardValue1).append(cardValue2);
-    
-//             $("#oCard" + i).css("display", "block");
-//             $("#pCard" + i).css("display", "block");
-
-//             replaceCards();
-//         }
-//     }
-//     else if (playerNum === 2) {
-//         // P2 Deal
-//         for (var i = 1; i <= 5; i++) {
-
-//             var cardIMG = $("<img>").attr("src", moviePosterURLs[i + (numRound * 10) + 4]);
-//             var cardValue1 = $("<h3>").text(cardValues[i + (numRound * 10) + 4]).addClass("top-right");
-//             var cardValue2 = $("<h3>").text(cardValues[i + (numRound * 10) + 4]).addClass("bottom-left");
-
-//             $("#card-bodyP" + i).attr("data-index", (i + (numRound * 10) + 4)).addClass("gameCard");
-//             $("#card-bodyP" + i).html(cardIMG).append(cardValue1).append(cardValue2);
-
-//             $("#oCard" + i).css("display", "block");
-//             $("#pCard" + i).css("display", "block");
-
-//             replaceCards();
-//         }
-//     }
-// }
 
 // ***************************************
 
@@ -834,14 +728,6 @@ function gameCheck() {
             lossesP2++;
 
             setTimeout(restart, 1000 * 3);
-            // resetGame();
-
-            // if (numRound === 2) {
-            //     setTimeout(nextRound, 1000 * 3);
-            // }
-            // else if (numRound === 3) {
-            //     setTimeout(lastRound, 1000 * 3);
-            // }
         }
         else if (playerOneData.Score < playerTwoData.Score) {
             $(".clicked").css("visibility", "hidden");
@@ -861,14 +747,6 @@ function gameCheck() {
             lossesP1++;
 
             setTimeout(restart, 1000 * 3);
-            // resetGame();
-
-            // if (numRound === 2) {
-            //     setTimeout(nextRound, 1000 * 3);
-            // }
-            // else if (numRound === 3) {
-            //     setTimeout(lastRound, 1000 * 3);
-            // }
         }
         else if (playerOneData.Score === playerTwoData.Score) {
             $(".clicked").css("visibility", "hidden");
@@ -889,14 +767,6 @@ function gameCheck() {
             winsP2++;
 
             setTimeout(restart, 1000 * 3);
-            // resetGame();
-
-            // if (numRound === 2) {
-            //     setTimeout(nextRound, 1000 * 3);
-            // }
-            // else if (numRound === 3) {
-            //     setTimeout(lastRound, 1000 * 3);
-            // }
         }
     }
 };
